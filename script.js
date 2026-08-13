@@ -6,6 +6,11 @@ const IS_LAUNCHED    = false;
 const PLAY_STORE_URL = '#';
 const FETCH_TIMEOUT  = 5000;
 
+// Cloudflare Worker relay for Meta Conversions API (server-side event
+// backup to the browser Pixel). Empty until deployed -- see
+// cloudflare/capi-relay/README.md. CAPI calls are skipped while unset.
+const CAPI_ENDPOINT = 'https://volum-capi-relay.bouncingballentertainment.workers.dev';
+
 /* ─── TRANSLATIONS ───────────────────────────────── */
 /* Static page content (nav, hero, features, FAQ, etc.) lives in
    i18n/{lang}.json and is baked into index.html / es/index.html / pt/index.html
@@ -65,16 +70,51 @@ function plausibleEvent(name, props) {
 
 /* ─── META PIXEL ─────────────────────────────────── */
 // Pixel base code (init + PageView) lives inline in each page's <head>.
-// These helpers fire additional events against the global fbq it defines.
+// These helpers fire additional events against the global fbq it defines,
+// and mirror each one to the Conversions API relay (server-side backup for
+// ad-blocker/ITP loss). Both sides share an event_id so Meta dedupes them
+// into a single conversion instead of double-counting.
+
+function getCookie(name) {
+  const match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+  return match ? decodeURIComponent(match[1]) : undefined;
+}
+
+function genEventId() {
+  return 'evt_' + Date.now() + '_' + Math.random().toString(36).slice(2, 10);
+}
+
+// Anonymous only -- no email/name/phone. See cloudflare/capi-relay/README.md.
+function sendCapiEvent(eventName, eventId, props) {
+  if (!CAPI_ENDPOINT) return;
+  const payload = {
+    event_name: eventName,
+    event_id: eventId,
+    event_source_url: window.location.href,
+    fbp: getCookie('_fbp'),
+    fbc: getCookie('_fbc'),
+    custom_data: props || {},
+  };
+  fetch(CAPI_ENDPOINT, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+    keepalive: true,
+  }).catch(() => {});
+}
 
 // Fire a Meta standard event (e.g. 'Lead'), mirroring plausibleEvent.
 function pixelEvent(name, props) {
-  if (window.fbq) window.fbq('track', name, props || {});
+  const eventId = genEventId();
+  if (window.fbq) window.fbq('track', name, props || {}, { eventID: eventId });
+  sendCapiEvent(name, eventId, props);
 }
 
 // Fire a Meta CUSTOM event (e.g. waitlist button clicks / intent signals).
 function pixelCustomEvent(name, props) {
-  if (window.fbq) window.fbq('trackCustom', name, props || {});
+  const eventId = genEventId();
+  if (window.fbq) window.fbq('trackCustom', name, props || {}, { eventID: eventId });
+  sendCapiEvent(name, eventId, props);
 }
 
 /* ─── ENGAGEMENT (signup-quality signals) ────────── */
