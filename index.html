@@ -27,23 +27,10 @@
           src="https://plausible.io/js/script.js"></script>
   <script>window.plausible=window.plausible||function(){(window.plausible.q=window.plausible.q||[]).push(arguments)}</script>
 
-  <!-- Meta Pixel Code -->
-  <script>
-  !function(f,b,e,v,n,t,s)
-  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  n.queue=[];t=b.createElement(e);t.async=!0;
-  t.src=v;s=b.getElementsByTagName(e)[0];
-  s.parentNode.insertBefore(t,s)}(window, document,'script',
-  'https://connect.facebook.net/en_US/fbevents.js');
-  fbq('init', '2011076452832345');
-  fbq('track', 'PageView');
-  </script>
-  <noscript><img height="1" width="1" style="display:none"
-  src="https://www.facebook.com/tr?id=2011076452832345&ev=PageView&noscript=1"
-  /></noscript>
-  <!-- End Meta Pixel Code -->
+  <!-- Meta Pixel: NOT loaded here. It only loads (script fetch + init +
+       PageView) after cookie consent is accepted -- see loadMetaPixel() in
+       script.js and the consent banner in <body>. No noscript pixel either,
+       since we can't gate tracking for JS-disabled visitors on consent. -->
 
   <script type="application/ld+json">
   {
@@ -105,7 +92,7 @@
 
   <meta name="theme-color" content="#0A121E">
   <link rel="icon" href="/assets/icon.png">
-  <link rel="stylesheet" href="/style.css?v=2.0">
+  <link rel="stylesheet" href="/style.css?v=2.1">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" onload="this.rel='stylesheet'">
@@ -609,6 +596,17 @@
     </div>
   </footer>
 
-  <script src="/script.js?v=2.4"></script>
+  <!-- ═══════════════════════════ COOKIE CONSENT ═══════════════════════════ -->
+  <div class="consent-banner" id="consent-banner" role="dialog" aria-live="polite" aria-label="Cookie consent" hidden>
+    <div class="consent-banner-inner">
+      <p class="consent-banner-text">We use cookies to measure how visitors use this site and to power ad campaigns (Meta Pixel). Read our <a href="https://bouncingballentertainment.github.io/volum-legal/privacy-policy.html" target="_blank" rel="noopener">Privacy Policy</a>.</p>
+      <div class="consent-banner-actions">
+        <button type="button" class="btn btn-ghost btn-sm" id="consent-decline">Decline</button>
+        <button type="button" class="btn btn-accent btn-sm" id="consent-accept">Accept</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/script.js?v=2.5"></script>
 </body>
 </html>

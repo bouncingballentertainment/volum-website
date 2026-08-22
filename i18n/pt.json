@@ -98,5 +98,8 @@
   "footer_terms": "Termos de Serviço",
   "footer_play": "Em breve no Google Play",
   "footer_ios": "Em breve na App Store",
-  "footer_copy": "© 2026 Bouncing Ball Entertainment. Todos os direitos reservados."
+  "footer_copy": "© 2026 Bouncing Ball Entertainment. Todos os direitos reservados.",
+  "consent_text": "Usamos cookies para medir como os visitantes usam este site e para nossas campanhas publicitárias (Meta Pixel). Leia nossa <a href=\"https://bouncingballentertainment.github.io/volum-legal/privacy-policy.html\" target=\"_blank\" rel=\"noopener\">Política de Privacidade</a>.",
+  "consent_accept": "Aceitar",
+  "consent_decline": "Recusar"
 }

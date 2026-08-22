@@ -68,12 +68,71 @@ function plausibleEvent(name, props) {
   if (window.plausible) window.plausible(name, { props: props || {} });
 }
 
+/* ─── COOKIE CONSENT ─────────────────────────────── */
+// Gates the Meta Pixel (script load + all events) and the CAPI relay behind
+// an explicit visitor choice. Nothing pixel-related runs until this reads
+// 'accepted'. Plausible is cookieless/unconditional -- not gated here.
+const CONSENT_KEY = 'volum_tracking_consent';
+
+function getConsent() {
+  try { return localStorage.getItem(CONSENT_KEY); } catch (e) { return null; }
+}
+
+function setConsent(value) {
+  try { localStorage.setItem(CONSENT_KEY, value); } catch (e) {}
+}
+
+function initConsentBanner() {
+  const banner  = document.getElementById('consent-banner');
+  const accept  = document.getElementById('consent-accept');
+  const decline = document.getElementById('consent-decline');
+  if (!banner || !accept || !decline) return;
+
+  const existing = getConsent();
+  if (existing === 'accepted') {
+    loadMetaPixel();
+    return;
+  }
+  if (existing === 'declined') return;
+
+  banner.hidden = false;
+
+  accept.addEventListener('click', () => {
+    setConsent('accepted');
+    banner.hidden = true;
+    loadMetaPixel();
+  });
+
+  decline.addEventListener('click', () => {
+    setConsent('declined');
+    banner.hidden = true;
+  });
+}
+
 /* ─── META PIXEL ─────────────────────────────────── */
-// Pixel base code (init + PageView) lives inline in each page's <head>.
-// These helpers fire additional events against the global fbq it defines,
-// and mirror each one to the Conversions API relay (server-side backup for
+// The pixel script itself is only fetched, initialized, and fires PageView
+// after consent is granted (see initConsentBanner above). These helpers
+// fire additional events against the global fbq it defines, and mirror
+// each one to the Conversions API relay (server-side backup for
 // ad-blocker/ITP loss). Both sides share an event_id so Meta dedupes them
 // into a single conversion instead of double-counting.
+const META_PIXEL_ID = '2011076452832345';
+let metaPixelLoaded = false;
+
+function loadMetaPixel() {
+  if (metaPixelLoaded || getConsent() !== 'accepted') return;
+  metaPixelLoaded = true;
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  window.fbq('init', META_PIXEL_ID);
+  window.fbq('track', 'PageView');
+}
 
 function getCookie(name) {
   const match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
@@ -86,7 +145,7 @@ function genEventId() {
 
 // Anonymous only -- no email/name/phone. See cloudflare/capi-relay/README.md.
 function sendCapiEvent(eventName, eventId, props) {
-  if (!CAPI_ENDPOINT) return;
+  if (!CAPI_ENDPOINT || getConsent() !== 'accepted') return;
   const payload = {
     event_name: eventName,
     event_id: eventId,
@@ -105,6 +164,7 @@ function sendCapiEvent(eventName, eventId, props) {
 
 // Fire a Meta standard event (e.g. 'Lead'), mirroring plausibleEvent.
 function pixelEvent(name, props) {
+  if (getConsent() !== 'accepted') return;
   const eventId = genEventId();
   if (window.fbq) window.fbq('track', name, props || {}, { eventID: eventId });
   sendCapiEvent(name, eventId, props);
@@ -112,6 +172,7 @@ function pixelEvent(name, props) {
 
 // Fire a Meta CUSTOM event (e.g. waitlist button clicks / intent signals).
 function pixelCustomEvent(name, props) {
+  if (getConsent() !== 'accepted') return;
   const eventId = genEventId();
   if (window.fbq) window.fbq('trackCustom', name, props || {}, { eventID: eventId });
   sendCapiEvent(name, eventId, props);
@@ -749,6 +810,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initHamburger();
   initLaunchState();
   initEngagement();
+  initConsentBanner();
 
   captureUTM('utm-source-hero');
   captureUTM('utm-source-mid');
