@@ -5,6 +5,7 @@
 const IS_LAUNCHED    = false;
 const PLAY_STORE_URL = '#';
 const FETCH_TIMEOUT  = 5000;
+const EMAIL_PATTERN  = /^[^\s@.]+(?:\.[^\s@.]+)*@(?:[^\s@.]+\.)+[^\s@.]+$/u;
 
 // Cloudflare Worker relay for Meta Conversions API (server-side event
 // backup to the browser Pixel). Empty until deployed -- see
@@ -24,6 +25,7 @@ const TRANSLATIONS = {
     form_success_mid: 'You\'re on the list! We\'ll be in touch.',
     form_success_bottom: 'You\'re in. We\'ll message you on launch day.',
     form_error: 'Something went wrong. Try again.',
+    email_error: 'Please enter a valid email address.',
     sending: 'Sending…',
     platform_error: 'Please select Android or iPhone.',
     lang_label: 'EN',
@@ -33,6 +35,7 @@ const TRANSLATIONS = {
     form_success_mid: '¡Estás en la lista! Estaremos en contacto.',
     form_success_bottom: '¡Ya estás dentro! Te escribiremos el día del lanzamiento.',
     form_error: 'Algo salió mal. Inténtalo de nuevo.',
+    email_error: 'Introduce una dirección de correo válida.',
     sending: 'Enviando…',
     platform_error: 'Por favor selecciona Android o iPhone.',
     lang_label: 'ES',
@@ -42,6 +45,7 @@ const TRANSLATIONS = {
     form_success_mid: 'Você está na lista! Entraremos em contato.',
     form_success_bottom: 'Você está dentro! Vamos te avisar no dia do lançamento.',
     form_error: 'Algo deu errado. Tente novamente.',
+    email_error: 'Insira um endereço de e-mail válido.',
     sending: 'Enviando…',
     platform_error: 'Por favor selecione Android ou iPhone.',
     lang_label: 'PT',
@@ -371,9 +375,33 @@ function wireWaitlistForm(formId, msgId, submitBtnId, formLabel) {
   injectUTMFields(form);
 
   const originalBtnText = submitBtn.textContent;
+  const emailInput = form.querySelector('input[type="email"]');
+  const updateEmailValidity = () => {
+    if (!emailInput) return true;
+    const value = emailInput.value.trim();
+    const hasFormatError = value !== '' && !EMAIL_PATTERN.test(value);
+    emailInput.setCustomValidity(hasFormatError ? t('email_error') : '');
+    emailInput.setAttribute('aria-invalid', hasFormatError ? 'true' : 'false');
+    if (!hasFormatError && msgEl.textContent === t('email_error')) {
+      msgEl.textContent = '';
+      msgEl.className = 'form-message';
+    }
+    return !hasFormatError;
+  };
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    if (emailInput) {
+      emailInput.value = emailInput.value.trim();
+      updateEmailValidity();
+      if (!emailInput.checkValidity()) {
+        emailInput.reportValidity();
+        msgEl.textContent = t('email_error');
+        msgEl.className = 'form-message form-error-msg';
+        return;
+      }
+    }
 
     // Platform choice (Android / iPhone) is mandatory.
     const platformInput = form.querySelector('.platform-hidden-input');
@@ -426,13 +454,27 @@ function wireWaitlistForm(formId, msgId, submitBtnId, formLabel) {
     }
   });
 
+  if (emailInput) {
+    emailInput.addEventListener('input', updateEmailValidity);
+    emailInput.addEventListener('blur', () => {
+      emailInput.value = emailInput.value.trim();
+      updateEmailValidity();
+    });
+    emailInput.addEventListener('invalid', () => {
+      updateEmailValidity();
+      if (!emailInput.validity.valueMissing) {
+        msgEl.textContent = t('email_error');
+        msgEl.className = 'form-message form-error-msg';
+      }
+    });
+  }
+
   // Intent signal: user tapped the CTA (fires even if email/consent invalid).
   submitBtn.addEventListener('click', () => {
     plausibleEvent('Waitlist_Click', { form: formLabel });
     pixelCustomEvent('WaitlistButtonClick', { form: formLabel });
   });
 
-  const emailInput = form.querySelector('input[type="email"]');
   if (emailInput) {
     let focusFired = false;
     emailInput.addEventListener('focus', () => {

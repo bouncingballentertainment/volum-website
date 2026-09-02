@@ -166,7 +166,9 @@
           <input type="hidden" name="platform" class="platform-hidden-input">
           <input class="waitlist-input" type="email" name="email"
                  placeholder="Seu endereço de e-mail"
-                 required autocomplete="email">
+                 required maxlength="254"
+                 pattern="[^\s@.]+(?:\.[^\s@.]+)*@(?:[^\s@.]+\.)+[^\s@.]+"
+                 autocomplete="email" aria-describedby="hero-form-msg">
           <label class="form-consent-check">
             <input type="checkbox" name="consent" value="I agree to receive launch emails and accept the Privacy Policy" required>
             <span>Concordo em receber um e-mail de lançamento da Volum e aceito a <a href="https://bouncingballentertainment.github.io/volum-legal/privacy-policy.html" target="_blank" rel="noopener">Política de Privacidade</a>.</span>
@@ -408,7 +410,9 @@
             <input type="hidden" name="platform" class="platform-hidden-input">
             <input class="waitlist-input" type="email" name="email"
                    placeholder="Seu endereço de e-mail"
-                   required autocomplete="email">
+                   required maxlength="254"
+                   pattern="[^\s@.]+(?:\.[^\s@.]+)*@(?:[^\s@.]+\.)+[^\s@.]+"
+                   autocomplete="email" aria-describedby="mid-form-msg">
             <label class="form-consent-check">
               <input type="checkbox" name="consent" value="I agree to receive launch emails and accept the Privacy Policy" required>
               <span>Concordo em receber um e-mail de lançamento da Volum e aceito a <a href="https://bouncingballentertainment.github.io/volum-legal/privacy-policy.html" target="_blank" rel="noopener">Política de Privacidade</a>.</span>
@@ -539,7 +543,9 @@
         <input type="hidden" name="platform" class="platform-hidden-input">
         <input class="waitlist-input" type="email" name="email"
                placeholder="Seu endereço de e-mail"
-               required autocomplete="email">
+               required maxlength="254"
+               pattern="[^\s@.]+(?:\.[^\s@.]+)*@(?:[^\s@.]+\.)+[^\s@.]+"
+               autocomplete="email" aria-describedby="bottom-form-msg">
         <label class="form-consent-check">
           <input type="checkbox" name="consent" value="I agree to receive launch emails and accept the Privacy Policy" required>
           <span>Concordo em receber um e-mail de lançamento da Volum e aceito a <a href="https://bouncingballentertainment.github.io/volum-legal/privacy-policy.html" target="_blank" rel="noopener">Política de Privacidade</a>.</span>
