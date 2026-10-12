@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Volum: App de Gimnasio Gratis · Sobrecarga Progresiva Simplificada</title>
-  <meta name="description" content="Sabe exactamente qué levantar en cada sesión. Volum planifica tu entrenamiento: peso, series y repeticiones. Tu volumen crece automáticamente. App de gimnasio gratis para Android e iOS, próximamente.">
+  <meta name="description" content="Sabe exactamente qué levantar en cada sesión. Volum planifica tu entrenamiento: peso, series y repeticiones. Tu volumen crece automáticamente. App de gimnasio gratis, ya disponible en Google Play para Android. iOS próximamente.">
 
   <meta property="og:title"       content="Volum: App de Gimnasio Gratis">
   <meta property="og:description" content="Sabe exactamente qué levantar en cada sesión. Volum planifica tu entrenamiento para que tu volumen crezca automáticamente.">
@@ -38,11 +38,14 @@
     "@type": "SoftwareApplication",
     "name": "Volum",
     "description": "App de gimnasio gratis que planifica cada sesión: peso, series y repeticiones. Tu volumen crece automáticamente.",
-    "operatingSystem": ["Android", "iOS"],
+    "operatingSystem": "Android",
     "applicationCategory": "HealthApplication",
     "inLanguage": ["en", "es", "pt"],
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "url": "https://app-volum.com/"
+    "url": "https://app-volum.com/",
+    "downloadUrl": "https://play.google.com/store/apps/details?id=com.volum.app",
+    "installUrl": "https://play.google.com/store/apps/details?id=com.volum.app",
+    "sameAs": ["https://play.google.com/store/apps/details?id=com.volum.app"]
   }
   </script>
 
@@ -79,7 +82,7 @@
       {
         "@type": "Question",
         "name": "¿Volum es gratis y en qué plataformas está disponible?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Sí. Volum es una app de entrenamiento gratuita para Android e iOS, con lanzamiento en el Q3 de 2026. Únete a la lista de espera para obtener acceso anticipado y un único correo el día del lanzamiento, sin tarjeta de crédito." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Sí. Volum es una app de entrenamiento gratuita, disponible ahora en Google Play para Android. La versión para iOS llega pronto: únete a la lista de espera de iOS y te enviaremos un único correo el día del lanzamiento." }
       },
       {
         "@type": "Question",
@@ -92,7 +95,7 @@
 
   <meta name="theme-color" content="#0A121E">
   <link rel="icon" href="/assets/icon.png">
-  <link rel="stylesheet" href="/style.css?v=2.1">
+  <link rel="stylesheet" href="/style.css?v=2.2">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" onload="this.rel='stylesheet'">
@@ -124,7 +127,7 @@
         </ul>
       </div>
 
-      <a href="#waitlist" class="btn btn-accent btn-sm nav-cta">Unirse a la lista de espera</a>
+      <a href="https://play.google.com/store/apps/details?id=com.volum.app&amp;referrer=utm_source%3Dapp-volum.com%26utm_medium%3Dwebsite%26utm_campaign%3Dnav" target="_blank" rel="noopener" class="btn btn-accent btn-sm nav-cta" data-slot="nav">Disponible en Google Play</a>
       <button class="hamburger" id="hamburger"
               aria-label="Open menu" aria-expanded="false" aria-controls="nav-mobile">
         <span></span><span></span><span></span>
@@ -135,7 +138,7 @@
       <a href="#how-it-works">Cómo Funciona</a>
       <a href="#testimonials">Testimonios</a>
       <a href="#real-numbers">Resultados Reales</a>
-      <a href="#waitlist" class="btn btn-accent">Unirse a la lista de espera</a>
+      <a href="https://play.google.com/store/apps/details?id=com.volum.app&amp;referrer=utm_source%3Dapp-volum.com%26utm_medium%3Dwebsite%26utm_campaign%3Dnav" target="_blank" rel="noopener" class="btn btn-accent" data-slot="nav">Disponible en Google Play</a>
     </div>
   </nav>
 
@@ -150,35 +153,36 @@
     <div class="container hero-row">
 
       <div class="hero-content">
-        <p class="hero-eyebrow">App de Gimnasio · Android &amp; iOS</p>
+        <p class="hero-eyebrow">App de Gimnasio · Ya en Android</p>
         <h1 class="hero-headline">Siempre sabes<br><span class="hl">cuánto levantar.</span></h1>
         <p class="hero-sub">Deja de perder 20 minutos decidiendo qué levantar. Volum planifica cada sesión: el peso exacto, las series y las repeticiones.</p>
         <p class="hero-differentiator">La mayoría de apps registran lo que hiciste. Volum te dice qué hacer después.</p>
         <p class="hero-proof">Un fundador. 157 sesiones reales. 446.519 lbs registradas.</p>
-        <p class="waitlist-count">Lista de espera abierta · Plazas de acceso anticipado limitadas.</p>
-        <div class="platform-picker" data-form="waitlist-form-hero">
-          <button type="button" class="btn btn-ghost btn-sm platform-btn" data-platform="android">Android</button>
-          <button type="button" class="btn btn-ghost btn-sm platform-btn" data-platform="ios">iPhone</button>
+        <a class="play-cta" data-slot="hero" href="https://play.google.com/store/apps/details?id=com.volum.app&amp;referrer=utm_source%3Dapp-volum.com%26utm_medium%3Dwebsite%26utm_campaign%3Dhero" target="_blank" rel="noopener">
+          <img src="/assets/badges/play-es-419.png" alt="Disponible en Google Play" width="646" height="250" loading="lazy">
+        </a>
+        <p class="region-note">Disponible en 43 países. Europa próximamente.</p>
+        <div class="ios-waitlist">
+          <p class="ios-waitlist-h">¿Usas iPhone? Únete a la lista de espera de iOS</p>
+          <form class="waitlist-form" id="waitlist-form-hero"
+                action="https://formspree.io/f/mgoqbdyo" method="POST">
+            <input type="hidden" name="utm_source" id="utm-source-hero">
+            <input type="hidden" name="platform" class="platform-hidden-input" value="ios">
+            <input class="waitlist-input" type="email" name="email"
+                   placeholder="Tu correo electrónico"
+                   required maxlength="254"
+                   pattern="[^\s@.]+(?:\.[^\s@.]+)*@(?:[^\s@.]+\.)+[^\s@.]+"
+                   autocomplete="email" aria-describedby="hero-form-msg">
+            <label class="form-consent-check">
+              <input type="checkbox" name="consent" value="I agree to receive one email when Volum launches on iOS and accept the Privacy Policy" required>
+              <span>Acepto recibir un correo de Bouncing Ball Entertainment cuando Volum se lance en iOS y acepto la <a href="https://bouncingballentertainment.github.io/volum-legal/privacy-policy.html" target="_blank" rel="noopener">Política de Privacidad</a>.</span>
+            </label>
+            <button class="btn btn-accent" type="submit" id="hero-submit-btn">Avísame cuando llegue a iOS</button>
+          </form>
+          <p class="form-privacy">Un correo cuando se lance la app en iOS. Puedes retirar tu consentimiento cuando quieras.</p>
+          <p class="form-message" id="hero-form-msg" aria-live="polite"></p>
         </div>
-        <form class="waitlist-form" id="waitlist-form-hero"
-              action="https://formspree.io/f/mgoqbdyo" method="POST">
-          <input type="hidden" name="utm_source" id="utm-source-hero">
-          <input type="hidden" name="platform" class="platform-hidden-input">
-          <input class="waitlist-input" type="email" name="email"
-                 placeholder="Tu correo electrónico"
-                 required maxlength="254"
-                 pattern="[^\s@.]+(?:\.[^\s@.]+)*@(?:[^\s@.]+\.)+[^\s@.]+"
-                 autocomplete="email" aria-describedby="hero-form-msg">
-          <label class="form-consent-check">
-            <input type="checkbox" name="consent" value="I agree to receive launch emails and accept the Privacy Policy" required>
-            <span>Acepto recibir un correo de lanzamiento de Volum y la <a href="https://bouncingballentertainment.github.io/volum-legal/privacy-policy.html" target="_blank" rel="noopener">Política de Privacidad</a>.</span>
-          </label>
-          <button class="btn btn-accent" type="submit" id="hero-submit-btn"
-            >Obtener Acceso Anticipado</button>
-        </form>
-        <p class="form-privacy">Un correo cuando lancemos. Cancela cuando quieras.</p>
-        <p class="form-message" id="hero-form-msg" aria-live="polite"></p>
-        <p class="hero-launch">Próximamente.</p>
+        <p class="hero-launch">Ya en Google Play. iOS próximamente.</p>
       </div>
 
       <div class="hero-visual" aria-label="Volum app screens">
@@ -400,28 +404,29 @@
           <blockquote class="mid-cta-quote">"Con Volum llego lista, ejecuto y puedo ver claramente cómo progreso."<cite> · Daniela Rojas</cite></blockquote>
         </div>
         <div class="mid-cta-right">
-          <div class="platform-picker" data-form="waitlist-form-mid">
-            <button type="button" class="btn btn-ghost btn-sm platform-btn" data-platform="android">Android</button>
-            <button type="button" class="btn btn-ghost btn-sm platform-btn" data-platform="ios">iPhone</button>
-          </div>
-          <form class="waitlist-form mid-cta-form" id="waitlist-form-mid"
-                action="https://formspree.io/f/mgoqbdyo" method="POST">
-            <input type="hidden" name="utm_source" id="utm-source-mid">
-            <input type="hidden" name="platform" class="platform-hidden-input">
-            <input class="waitlist-input" type="email" name="email"
-                   placeholder="Tu correo electrónico"
-                   required maxlength="254"
-                   pattern="[^\s@.]+(?:\.[^\s@.]+)*@(?:[^\s@.]+\.)+[^\s@.]+"
-                   autocomplete="email" aria-describedby="mid-form-msg">
-            <label class="form-consent-check">
-              <input type="checkbox" name="consent" value="I agree to receive launch emails and accept the Privacy Policy" required>
-              <span>Acepto recibir un correo de lanzamiento de Volum y la <a href="https://bouncingballentertainment.github.io/volum-legal/privacy-policy.html" target="_blank" rel="noopener">Política de Privacidad</a>.</span>
-            </label>
-            <button class="btn btn-accent" type="submit" id="mid-submit-btn"
-              >Obtener Acceso Anticipado</button>
-          </form>
-          <p class="form-privacy">Un correo cuando lancemos. Cancela cuando quieras.</p>
+          <a class="play-cta" data-slot="mid" href="https://play.google.com/store/apps/details?id=com.volum.app&amp;referrer=utm_source%3Dapp-volum.com%26utm_medium%3Dwebsite%26utm_campaign%3Dmid" target="_blank" rel="noopener">
+            <img src="/assets/badges/play-es-419.png" alt="Disponible en Google Play" width="646" height="250" loading="lazy">
+          </a>
+          <div class="ios-waitlist">
+            <p class="ios-waitlist-h">¿Usas iPhone? Únete a la lista de espera de iOS</p>
+            <form class="waitlist-form mid-cta-form" id="waitlist-form-mid"
+                  action="https://formspree.io/f/mgoqbdyo" method="POST">
+              <input type="hidden" name="utm_source" id="utm-source-mid">
+              <input type="hidden" name="platform" class="platform-hidden-input" value="ios">
+              <input class="waitlist-input" type="email" name="email"
+                     placeholder="Tu correo electrónico"
+                     required maxlength="254"
+                     pattern="[^\s@.]+(?:\.[^\s@.]+)*@(?:[^\s@.]+\.)+[^\s@.]+"
+                     autocomplete="email" aria-describedby="mid-form-msg">
+              <label class="form-consent-check">
+                <input type="checkbox" name="consent" value="I agree to receive one email when Volum launches on iOS and accept the Privacy Policy" required>
+                <span>Acepto recibir un correo de Bouncing Ball Entertainment cuando Volum se lance en iOS y acepto la <a href="https://bouncingballentertainment.github.io/volum-legal/privacy-policy.html" target="_blank" rel="noopener">Política de Privacidad</a>.</span>
+              </label>
+              <button class="btn btn-accent" type="submit" id="mid-submit-btn">Avísame cuando llegue a iOS</button>
+            </form>
+            <p class="form-privacy">Un correo cuando se lance la app en iOS. Puedes retirar tu consentimiento cuando quieras.</p>
             <p class="form-message" id="mid-form-msg" aria-live="polite"></p>
+          </div>
         </div>
       </div>
     </div>
@@ -517,7 +522,7 @@
         </details>
         <details class="faq-item">
           <summary>¿Volum es gratis y en qué plataformas está disponible?</summary>
-          <p class="faq-answer">Sí. Volum es una app de entrenamiento gratuita para Android e iOS, con lanzamiento en el Q3 de 2026. Únete a la lista de espera para obtener acceso anticipado y un único correo el día del lanzamiento, sin tarjeta de crédito.</p>
+          <p class="faq-answer">Sí. Volum es una app de entrenamiento gratuita, disponible ahora en Google Play para Android. La versión para iOS llega pronto: únete a la lista de espera de iOS y te enviaremos un único correo el día del lanzamiento.</p>
         </details>
         <details class="faq-item">
           <summary>¿Qué significa el volumen en el entrenamiento con pesas?</summary>
@@ -530,32 +535,33 @@
   <!-- ════════════════════════════ WAITLIST CTA ════════════════════════════ -->
   <section class="waitlist-section" id="waitlist">
     <div class="container waitlist-inner">
-      <p class="waitlist-count">Lista de espera abierta · Plazas de acceso anticipado limitadas.</p>
       <h2>Deja de adivinar. Empieza a crecer.</h2>
-      <p>Tu lugar es gratis. Te avisamos en el momento en que Volum llegue.</p>
-      <div class="platform-picker" data-form="waitlist-form-bottom">
-        <button type="button" class="btn btn-ghost btn-sm platform-btn" data-platform="android">Android</button>
-        <button type="button" class="btn btn-ghost btn-sm platform-btn" data-platform="ios">iPhone</button>
+      <p>Descarga Volum hoy en Android. ¿Usas iPhone? Deja tu correo y te avisamos en cuanto llegue.</p>
+      <a class="play-cta" data-slot="bottom" href="https://play.google.com/store/apps/details?id=com.volum.app&amp;referrer=utm_source%3Dapp-volum.com%26utm_medium%3Dwebsite%26utm_campaign%3Dbottom" target="_blank" rel="noopener">
+        <img src="/assets/badges/play-es-419.png" alt="Disponible en Google Play" width="646" height="250" loading="lazy">
+      </a>
+      <p class="region-note">Disponible en 43 países. Europa próximamente.</p>
+      <div class="ios-waitlist">
+        <p class="ios-waitlist-h">¿Usas iPhone? Únete a la lista de espera de iOS</p>
+        <p class="waitlist-count">Un solo correo, solo cuando se lance la app en iOS.</p>
+        <form class="waitlist-form waitlist-form-large" id="waitlist-form-bottom"
+              action="https://formspree.io/f/mgoqbdyo" method="POST">
+          <input type="hidden" name="utm_source" id="utm-source-bottom">
+          <input type="hidden" name="platform" class="platform-hidden-input" value="ios">
+          <input class="waitlist-input" type="email" name="email"
+                 placeholder="Tu correo electrónico"
+                 required maxlength="254"
+                 pattern="[^\s@.]+(?:\.[^\s@.]+)*@(?:[^\s@.]+\.)+[^\s@.]+"
+                 autocomplete="email" aria-describedby="bottom-form-msg">
+          <label class="form-consent-check">
+            <input type="checkbox" name="consent" value="I agree to receive one email when Volum launches on iOS and accept the Privacy Policy" required>
+            <span>Acepto recibir un correo de Bouncing Ball Entertainment cuando Volum se lance en iOS y acepto la <a href="https://bouncingballentertainment.github.io/volum-legal/privacy-policy.html" target="_blank" rel="noopener">Política de Privacidad</a>.</span>
+          </label>
+          <button class="btn btn-accent" type="submit" id="bottom-submit-btn">Avísame cuando llegue a iOS</button>
+        </form>
+        <p class="form-privacy">Un correo cuando se lance la app en iOS. Puedes retirar tu consentimiento cuando quieras.</p>
+        <p class="form-message" id="bottom-form-msg" aria-live="polite"></p>
       </div>
-      <form class="waitlist-form waitlist-form-large" id="waitlist-form-bottom"
-            action="https://formspree.io/f/mgoqbdyo" method="POST">
-        <input type="hidden" name="utm_source" id="utm-source-bottom">
-        <input type="hidden" name="platform" class="platform-hidden-input">
-        <input class="waitlist-input" type="email" name="email"
-               placeholder="Tu correo electrónico"
-               required maxlength="254"
-               pattern="[^\s@.]+(?:\.[^\s@.]+)*@(?:[^\s@.]+\.)+[^\s@.]+"
-               autocomplete="email" aria-describedby="bottom-form-msg">
-        <label class="form-consent-check">
-          <input type="checkbox" name="consent" value="I agree to receive launch emails and accept the Privacy Policy" required>
-          <span>Acepto recibir un correo de lanzamiento de Volum y la <a href="https://bouncingballentertainment.github.io/volum-legal/privacy-policy.html" target="_blank" rel="noopener">Política de Privacidad</a>.</span>
-        </label>
-        <button class="btn btn-accent" type="submit" id="bottom-submit-btn"
-          >Obtener Acceso Anticipado</button>
-      </form>
-      <p class="form-privacy">Un correo cuando lancemos. Cancela cuando quieras.</p>
-      <!-- consent moved into form as required opt-in checkbox -->
-      <p class="form-message" id="bottom-form-msg" aria-live="polite"></p>
       <div class="share-nudge" id="share-nudge" style="display:none;">
         <span>¿Conoces a alguien que entrene?</span>
         <button type="button" id="share-btn">Compartir esta página</button>
@@ -577,6 +583,7 @@
            target="_blank" rel="noopener">Política de privacidad</a>
         <a href="https://bouncingballentertainment.github.io/volum-legal/terms-of-service.html"
            target="_blank" rel="noopener">Términos de servicio</a>
+        <a href="#" id="cookie-settings">Configuración de cookies</a>
       </nav>
       <div class="footer-social">
         <a href="https://www.instagram.com/app.volum/" target="_blank" rel="noopener" aria-label="Follow Volum on Instagram">
@@ -589,16 +596,17 @@
         </a>
       </div>
       <div class="footer-badges">
-        <span class="badge badge-play" id="play-badge" aria-label="Coming to Google Play" title="Coming soon">
+        <a class="badge badge-play active" id="play-badge" data-slot="footer" href="https://play.google.com/store/apps/details?id=com.volum.app&amp;referrer=utm_source%3Dapp-volum.com%26utm_medium%3Dwebsite%26utm_campaign%3Dfooter" target="_blank" rel="noopener" aria-label="Disponible en Google Play">
           <svg class="badge-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 20.5v-17c0-.83.92-1.3 1.6-.86l14 8.5a1 1 0 010 1.72l-14 8.5C3.92 21.8 3 21.33 3 20.5z"/></svg>
-          <span>Próximamente en Google Play</span>
-        </span>
+          <span>Disponible en Google Play</span>
+        </a>
         <span class="badge" title="iOS version coming soon">
           <svg class="badge-icon" width="14" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
-          <span>Próximamente en App Store</span>
+          <span>iOS: próximamente</span>
         </span>
       </div>
       <p class="footer-copy">© 2026 Bouncing Ball Entertainment. Todos los derechos reservados.</p>
+      <p class="footer-trademark">Google Play y el logotipo de Google Play son marcas registradas de Google LLC.</p>
     </div>
   </footer>
 
@@ -613,6 +621,6 @@
     </div>
   </div>
 
-  <script src="/script.js?v=2.5"></script>
+  <script src="/script.js?v=2.6"></script>
 </body>
 </html>

@@ -1347,11 +1347,9 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .hero-content > .hero-eyebrow        { order: 1; }
   .hero-content > .hero-headline       { order: 2; }
   .hero-content > .hero-sub            { order: 3; }
-  .hero-content > .waitlist-count      { order: 4; }
-  .hero-content > .platform-picker     { order: 5; }
-  .hero-content > .waitlist-form       { order: 6; }
-  .hero-content > .form-privacy        { order: 7; }
-  .hero-content > .form-message        { order: 8; }
+  .hero-content > .play-cta            { order: 4; }
+  .hero-content > .region-note         { order: 5; }
+  .hero-content > .ios-waitlist        { order: 6; }
   .hero-content > .hero-differentiator { order: 9; }
   .hero-content > .hero-proof          { order: 10; }
   .hero-content > .hero-launch         { order: 11; }
@@ -1799,4 +1797,34 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 }
 @media (max-width:360px) {
   .hero-headline { font-size:28px; }
+}
+
+/* ─── GOOGLE PLAY CTA + iOS WAITLIST ─────────────── */
+.play-cta { display: inline-block; margin: 14px 0 4px -8px; line-height: 0; }
+.play-cta img { width: 200px; height: auto; display: block; }
+.play-cta:hover img { filter: brightness(1.08); }
+.region-note { font-size: 12px; color: var(--text-muted); margin: 0 0 18px; }
+.ios-waitlist {
+  max-width: 420px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+.ios-waitlist-h {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin: 0 0 10px;
+}
+.waitlist-inner .play-cta { margin: 18px auto 4px; }
+.waitlist-inner .play-cta img { width: 220px; }
+.waitlist-inner .region-note { text-align: center; }
+.waitlist-inner .ios-waitlist { margin: 0 auto; }
+.waitlist-inner .ios-waitlist .waitlist-count { margin-bottom: 14px; text-align: center; }
+.waitlist-inner .ios-waitlist-h { text-align: center; }
+.mid-cta-right .play-cta { margin-left: 0; }
+.footer-trademark { font-size: 11px; color: var(--text-muted); margin-top: 6px; text-align: center; }
+.badge-play.active { text-decoration: none; }
+@media (max-width: 767px) {
+  .play-cta { margin-left: 0; }
+  .play-cta img { width: 190px; }
 }

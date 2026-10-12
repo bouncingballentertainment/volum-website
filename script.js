@@ -2,8 +2,6 @@
    VOLUM — script.js  (v3)
 ═══════════════════════════════════════════════════ */
 
-const IS_LAUNCHED    = false;
-const PLAY_STORE_URL = '#';
 const FETCH_TIMEOUT  = 5000;
 const EMAIL_PATTERN  = /^[^\s@.]+(?:\.[^\s@.]+)*@(?:[^\s@.]+\.)+[^\s@.]+$/u;
 
@@ -27,27 +25,24 @@ const TRANSLATIONS = {
     form_error: 'Something went wrong. Try again.',
     email_error: 'Please enter a valid email address.',
     sending: 'Sending…',
-    platform_error: 'Please select Android or iPhone.',
     lang_label: 'EN',
   },
   es: {
-    form_success_hero: '¡Estás en la lista! Estaremos en contacto.',
-    form_success_mid: '¡Estás en la lista! Estaremos en contacto.',
-    form_success_bottom: '¡Ya estás dentro! Te escribiremos el día del lanzamiento.',
+    form_success_hero: '¡Estás en la lista de iOS! Te escribiremos cuando Volum llegue al iPhone.',
+    form_success_mid: '¡Estás en la lista de iOS! Te escribiremos cuando Volum llegue al iPhone.',
+    form_success_bottom: '¡Ya estás dentro! Te escribiremos el día que Volum llegue a iOS.',
     form_error: 'Algo salió mal. Inténtalo de nuevo.',
     email_error: 'Introduce una dirección de correo válida.',
     sending: 'Enviando…',
-    platform_error: 'Por favor selecciona Android o iPhone.',
     lang_label: 'ES',
   },
   pt: {
-    form_success_hero: 'Você está na lista! Entraremos em contato.',
-    form_success_mid: 'Você está na lista! Entraremos em contato.',
-    form_success_bottom: 'Você está dentro! Vamos te avisar no dia do lançamento.',
+    form_success_hero: 'Você está na lista do iOS! Avisaremos quando o Volum chegar ao iPhone.',
+    form_success_mid: 'Você está na lista do iOS! Avisaremos quando o Volum chegar ao iPhone.',
+    form_success_bottom: 'Você está dentro! Vamos te avisar no dia em que o Volum chegar ao iOS.',
     form_error: 'Algo deu errado. Tente novamente.',
     email_error: 'Insira um endereço de e-mail válido.',
     sending: 'Enviando…',
-    platform_error: 'Por favor selecione Android ou iPhone.',
     lang_label: 'PT',
   },
 };
@@ -93,13 +88,8 @@ function initConsentBanner() {
   if (!banner || !accept || !decline) return;
 
   const existing = getConsent();
-  if (existing === 'accepted') {
-    loadMetaPixel();
-    return;
-  }
-  if (existing === 'declined') return;
-
-  banner.hidden = false;
+  if (existing === 'accepted') loadMetaPixel();
+  else if (!existing) banner.hidden = false;
 
   accept.addEventListener('click', () => {
     setConsent('accepted');
@@ -108,8 +98,18 @@ function initConsentBanner() {
   });
 
   decline.addEventListener('click', () => {
+    const wasLoaded = metaPixelLoaded;
     setConsent('declined');
     banner.hidden = true;
+    // The pixel is already running in this page; reload so it stops.
+    if (wasLoaded) window.location.reload();
+  });
+
+  // Footer "Cookie settings" link: lets visitors change their choice later.
+  const reopen = document.getElementById('cookie-settings');
+  if (reopen) reopen.addEventListener('click', (e) => {
+    e.preventDefault();
+    banner.hidden = false;
   });
 }
 
@@ -403,20 +403,6 @@ function wireWaitlistForm(formId, msgId, submitBtnId, formLabel) {
       }
     }
 
-    // Platform choice (Android / iPhone) is mandatory.
-    const platformInput = form.querySelector('.platform-hidden-input');
-    if (platformInput && !platformInput.value) {
-      msgEl.textContent = t('platform_error');
-      msgEl.className   = 'form-message form-error-msg';
-      const picker = document.querySelector('.platform-picker[data-form="' + formId + '"]');
-      if (picker) {
-        picker.classList.remove('shake');
-        void picker.offsetWidth;          // restart the shake animation
-        picker.classList.add('shake');
-      }
-      return;
-    }
-
     plausibleEvent('Waitlist_Submit', { form: formLabel });
 
     submitBtn.disabled = true;
@@ -691,44 +677,16 @@ function wireShareButton() {
   });
 }
 
-/* ─── LAUNCH STATE ───────────────────────────────── */
-
-function initLaunchState() {
-  if (!IS_LAUNCHED) return;
-
-  document.querySelectorAll('.waitlist-form').forEach(form => {
-    const btn = document.createElement('a');
-    btn.href      = PLAY_STORE_URL;
-    btn.className = 'btn btn-accent';
-    btn.textContent = 'Download on Google Play';
-    btn.target    = '_blank';
-    btn.rel       = 'noopener';
-    form.replaceWith(btn);
-  });
-
-  const playBadge = document.getElementById('play-badge');
-  if (playBadge && PLAY_STORE_URL !== '#') {
-    const link = document.createElement('a');
-    link.href      = PLAY_STORE_URL;
-    link.className = playBadge.className + ' active';
-    link.id        = 'play-badge';
-    link.setAttribute('aria-label', playBadge.getAttribute('aria-label') || '');
-    link.innerHTML = playBadge.innerHTML;
-    link.target    = '_blank';
-    link.rel       = 'noopener';
-    playBadge.replaceWith(link);
-  }
-}
-
 /* ─── PLAUSIBLE NAV EVENTS ───────────────────────── */
 
-function initNavEvents() {
-  const navCta = document.querySelector('.nav-cta');
-  if (navCta) navCta.addEventListener('click', () => {
-    plausibleEvent('Nav_Waitlist_Click');
-    pixelCustomEvent('WaitlistButtonClick', { form: 'nav' });
+function initPlayLinks() {
+  document.querySelectorAll('a[href*="play.google.com"]').forEach(link => {
+    link.addEventListener('click', () => {
+      const slot = link.dataset.slot || 'unknown';
+      plausibleEvent('Play_Click', { slot: slot });
+      pixelCustomEvent('PlayStoreClick', { slot: slot });
+    });
   });
-
 }
 
 /* ─── TESTIMONIAL CARDS ──────────────────────────── */
@@ -739,33 +697,6 @@ function initTestimonialCards() {
       if (!e.target.closest('a')) {
         window.open(card.dataset.href, '_blank', 'noopener');
       }
-    });
-  });
-}
-
-/* ─── PLATFORM PICKER ────────────────────────────── */
-
-function initPlatformPickers() {
-  document.querySelectorAll('.platform-picker').forEach(picker => {
-    const form = document.getElementById(picker.dataset.form);
-    if (!form) return;
-    const hidden = form.querySelector('.platform-hidden-input');
-    picker.querySelectorAll('.platform-btn').forEach(btn => {
-      btn.setAttribute('aria-pressed', 'false');
-      btn.addEventListener('click', () => {
-        picker.querySelectorAll('.platform-btn').forEach(b => {
-          b.classList.toggle('btn-accent', b === btn);
-          b.classList.toggle('btn-ghost', b !== btn);
-          b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
-        });
-        hidden.value = btn.dataset.platform;
-        picker.classList.remove('shake');   // clear the error highlight
-        const msgEl = document.getElementById(form.id.replace('waitlist-form-', '') + '-form-msg');
-        if (msgEl && msgEl.classList.contains('form-error-msg')) {
-          msgEl.textContent = '';
-          msgEl.className   = 'form-message';
-        }
-      });
     });
   });
 }
@@ -850,7 +781,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initLangPicker();
   initNavbar();
   initHamburger();
-  initLaunchState();
   initEngagement();
   initConsentBanner();
 
@@ -858,14 +788,12 @@ document.addEventListener('DOMContentLoaded', () => {
   captureUTM('utm-source-mid');
   captureUTM('utm-source-bottom');
 
-  initPlatformPickers();
-
   wireWaitlistForm('waitlist-form-hero',   'hero-form-msg',   'hero-submit-btn',   'hero');
   wireWaitlistForm('waitlist-form-mid',    'mid-form-msg',    'mid-submit-btn',    'mid');
   wireWaitlistForm('waitlist-form-bottom', 'bottom-form-msg', 'bottom-submit-btn', 'bottom');
 
   wireShareButton();
-  initNavEvents();
+  initPlayLinks();
 
   initPodiumCarousel();
   initScrollReveal();
