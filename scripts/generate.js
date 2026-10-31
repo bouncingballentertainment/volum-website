@@ -16,7 +16,7 @@ const TEMPLATE_PATH = path.join(ROOT, 'template.html');
 
 const LOCALES = [
   { code: 'en', htmlLang: 'en', ogLocale: 'en_US', urlPath: '/', outFile: path.join(ROOT, 'index.html') },
-  { code: 'es', htmlLang: 'es', ogLocale: 'es_ES', urlPath: '/es/', outFile: path.join(ROOT, 'es', 'index.html') },
+  { code: 'es', htmlLang: 'es', ogLocale: 'es_LA', urlPath: '/es/', outFile: path.join(ROOT, 'es', 'index.html') },
   { code: 'pt', htmlLang: 'pt-BR', ogLocale: 'pt_BR', urlPath: '/pt/', outFile: path.join(ROOT, 'pt', 'index.html') },
 ];
 

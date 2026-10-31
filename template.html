@@ -8,9 +8,9 @@
 
   <meta property="og:title"       content="{{og_title}}">
   <meta property="og:description" content="{{og_description}}">
-  <meta property="og:image"       content="https://app-volum.com/assets/icon.png">
-  <meta property="og:image:width"  content="1024">
-  <meta property="og:image:height" content="1024">
+  <meta property="og:image"       content="https://app-volum.com/assets/og-image.png">
+  <meta property="og:image:width"  content="1344">
+  <meta property="og:image:height" content="768">
   <meta property="og:type"        content="website">
   <meta property="og:url"         content="{{__canonical_url}}">
   <meta property="og:locale"      content="{{__og_locale}}">
@@ -18,10 +18,8 @@
   <link rel="canonical"           href="{{__canonical_url}}">
   <link rel="alternate" hreflang="en" href="https://app-volum.com/">
   <link rel="alternate" hreflang="es" href="https://app-volum.com/es/">
-  <link rel="alternate" hreflang="pt" href="https://app-volum.com/pt/">
+  <link rel="alternate" hreflang="pt-BR" href="https://app-volum.com/pt/">
   <link rel="alternate" hreflang="x-default" href="https://app-volum.com/">
-
-  <link rel="preload" as="image" href="/assets/hero-bg.png">
 
   <script defer data-domain="app-volum.com"
           src="https://plausible.io/js/script.js"></script>
@@ -200,7 +198,7 @@
 
           <div class="hero-datacard">
             <span class="hero-datacard-label">{{hero_card_label}}</span>
-            <span class="hero-datacard-value"><span class="hero-datacard-num" data-countup="446519">446,519</span> <span class="hero-datacard-unit">lbs</span></span>
+            <span class="hero-datacard-value"><span class="hero-datacard-num" data-countup="{{volume_total}}">{{volume_total_display}}</span> <span class="hero-datacard-unit">{{weight_unit}}</span></span>
             <svg class="hero-spark" viewBox="0 0 200 70" fill="none" preserveAspectRatio="none" aria-hidden="true">
               <path class="hero-spark-area" d="M0,55 L25,58 L50,48 L75,52 L100,40 L125,43 L150,30 L175,22 L200,10 L200,70 L0,70 Z"></path>
               <path class="hero-spark-line" pathLength="1" d="M0,55 L25,58 L50,48 L75,52 L100,40 L125,43 L150,30 L175,22 L200,10"></path>
@@ -209,7 +207,7 @@
           </div>
 
           <div class="hero-chip">
-            <span class="hero-chip-up" aria-hidden="true">▲</span> +5 lbs <em>{{hero_chip}}</em>
+            <span class="hero-chip-up" aria-hidden="true">▲</span> {{chip_increment}} <em>{{hero_chip}}</em>
           </div>
         </div>
       </div>
@@ -460,7 +458,7 @@
       </div>
       <div class="stats-grid">
         <div class="stat-item">
-          <span class="stat-number" data-target="446519">446,519</span>
+          <span class="stat-number" data-target="{{volume_total}}">{{volume_total_display}}</span>
           <span class="stat-label">{{stat1_label}}</span>
         </div>
         <div class="stat-item">

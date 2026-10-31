@@ -340,8 +340,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 70% 60% at 15% 100%, rgba(53,158,255,0.13) 0%, transparent 55%),
-    url('assets/hero-bg.png') center / cover no-repeat;
+    radial-gradient(ellipse 70% 60% at 15% 100%, rgba(53,158,255,0.13) 0%, transparent 55%);
   z-index: 0;
 }
 .hero-bg::after {

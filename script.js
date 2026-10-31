@@ -6,8 +6,8 @@ const FETCH_TIMEOUT  = 5000;
 const EMAIL_PATTERN  = /^[^\s@.]+(?:\.[^\s@.]+)*@(?:[^\s@.]+\.)+[^\s@.]+$/u;
 
 // Cloudflare Worker relay for Meta Conversions API (server-side event
-// backup to the browser Pixel). Empty until deployed -- see
-// cloudflare/capi-relay/README.md. CAPI calls are skipped while unset.
+// backup to the browser Pixel), see cloudflare/capi-relay/README.md.
+// Set to '' to skip CAPI calls.
 const CAPI_ENDPOINT = 'https://volum-capi-relay.bouncingballentertainment.workers.dev';
 
 /* ─── TRANSLATIONS ───────────────────────────────── */
