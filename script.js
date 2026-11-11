@@ -2,8 +2,6 @@
    VOLUM — script.js  (v3)
 ═══════════════════════════════════════════════════ */
 
-const FETCH_TIMEOUT  = 5000;
-const EMAIL_PATTERN  = /^[^\s@.]+(?:\.[^\s@.]+)*@(?:[^\s@.]+\.)+[^\s@.]+$/u;
 
 // Cloudflare Worker relay for Meta Conversions API (server-side event
 // backup to the browser Pixel), see cloudflare/capi-relay/README.md.
@@ -19,30 +17,12 @@ const CAPI_ENDPOINT = 'https://volum-capi-relay.bouncingballentertainment.worker
    language-picker label. */
 const TRANSLATIONS = {
   en: {
-    form_success_hero: 'You\'re on the list! We\'ll be in touch.',
-    form_success_mid: 'You\'re on the list! We\'ll be in touch.',
-    form_success_bottom: 'You\'re in. We\'ll message you on launch day.',
-    form_error: 'Something went wrong. Try again.',
-    email_error: 'Please enter a valid email address.',
-    sending: 'Sending…',
     lang_label: 'EN',
   },
   es: {
-    form_success_hero: '¡Estás en la lista de iOS! Te escribiremos cuando Volum llegue al iPhone.',
-    form_success_mid: '¡Estás en la lista de iOS! Te escribiremos cuando Volum llegue al iPhone.',
-    form_success_bottom: '¡Ya estás dentro! Te escribiremos el día que Volum llegue a iOS.',
-    form_error: 'Algo salió mal. Inténtalo de nuevo.',
-    email_error: 'Introduce una dirección de correo válida.',
-    sending: 'Enviando…',
     lang_label: 'ES',
   },
   pt: {
-    form_success_hero: 'Você está na lista do iOS! Avisaremos quando o Volum chegar ao iPhone.',
-    form_success_mid: 'Você está na lista do iOS! Avisaremos quando o Volum chegar ao iPhone.',
-    form_success_bottom: 'Você está dentro! Vamos te avisar no dia em que o Volum chegar ao iOS.',
-    form_error: 'Algo deu errado. Tente novamente.',
-    email_error: 'Insira um endereço de e-mail válido.',
-    sending: 'Enviando…',
     lang_label: 'PT',
   },
 };
@@ -218,12 +198,6 @@ function initEngagement() {
   window.addEventListener('pagehide', () => timers.forEach(clearTimeout), { once: true });
 }
 
-function fetchWithTimeout(url, ms, init) {
-  const ctrl = new AbortController();
-  const timer = setTimeout(() => ctrl.abort(), ms);
-  return fetch(url, { ...init, signal: ctrl.signal }).finally(() => clearTimeout(timer));
-}
-
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 /* ─── LANGUAGE ───────────────────────────────────── */
@@ -338,138 +312,6 @@ function initHamburger() {
   });
 
   menu.querySelectorAll('a').forEach(link => link.addEventListener('click', close));
-}
-
-/* ─── UTM CAPTURE ────────────────────────────────── */
-
-function captureUTM(fieldId) {
-  const field = document.getElementById(fieldId);
-  if (!field) return;
-  const params = new URLSearchParams(window.location.search);
-  field.value = params.get('utm_source') || 'direct';
-}
-
-// Inject the remaining UTM parameters as hidden inputs so campaign reporting
-// (medium/campaign/term/content) is captured, not just the source.
-function injectUTMFields(form) {
-  if (!form) return;
-  const params = new URLSearchParams(window.location.search);
-  ['utm_medium', 'utm_campaign', 'utm_term', 'utm_content'].forEach(name => {
-    if (form.querySelector('[name="' + name + '"]')) return;
-    const input = document.createElement('input');
-    input.type = 'hidden';
-    input.name = name;
-    input.value = params.get(name) || '';
-    form.appendChild(input);
-  });
-}
-
-/* ─── WAITLIST FORM ──────────────────────────────── */
-
-function wireWaitlistForm(formId, msgId, submitBtnId, formLabel) {
-  const form    = document.getElementById(formId);
-  const msgEl   = document.getElementById(msgId);
-  const submitBtn = document.getElementById(submitBtnId);
-  if (!form || !msgEl || !submitBtn) return;
-
-  injectUTMFields(form);
-
-  const originalBtnText = submitBtn.textContent;
-  const emailInput = form.querySelector('input[type="email"]');
-  const updateEmailValidity = () => {
-    if (!emailInput) return true;
-    const value = emailInput.value.trim();
-    const hasFormatError = value !== '' && !EMAIL_PATTERN.test(value);
-    emailInput.setCustomValidity(hasFormatError ? t('email_error') : '');
-    emailInput.setAttribute('aria-invalid', hasFormatError ? 'true' : 'false');
-    if (!hasFormatError && msgEl.textContent === t('email_error')) {
-      msgEl.textContent = '';
-      msgEl.className = 'form-message';
-    }
-    return !hasFormatError;
-  };
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-
-    if (emailInput) {
-      emailInput.value = emailInput.value.trim();
-      updateEmailValidity();
-      if (!emailInput.checkValidity()) {
-        emailInput.reportValidity();
-        msgEl.textContent = t('email_error');
-        msgEl.className = 'form-message form-error-msg';
-        return;
-      }
-    }
-
-    plausibleEvent('Waitlist_Submit', { form: formLabel });
-
-    submitBtn.disabled = true;
-    submitBtn.textContent = t('sending');
-    msgEl.textContent = '';
-    msgEl.className = 'form-message';
-
-    try {
-      const res = await fetchWithTimeout(form.action, FETCH_TIMEOUT, {
-        method: 'POST',
-        body: new FormData(form),
-        headers: { 'Accept': 'application/json' },
-      });
-
-      if (res.ok) {
-        form.style.display = 'none';
-        msgEl.textContent  = t('form_success_' + formLabel);
-        msgEl.className    = 'form-message form-success-msg';
-        plausibleEvent('Waitlist_Success', { form: formLabel });
-        pixelEvent('Lead', { content_name: 'waitlist', source: formLabel });
-
-        if (formLabel === 'bottom') {
-          const nudge = document.getElementById('share-nudge');
-          if (nudge) nudge.style.display = 'block';
-        }
-      } else {
-        throw new Error('non-ok');
-      }
-    } catch {
-      submitBtn.disabled   = false;
-      submitBtn.textContent = originalBtnText;
-      msgEl.textContent    = t('form_error');
-      msgEl.className      = 'form-message form-error-msg';
-      plausibleEvent('Waitlist_Error', { form: formLabel });
-    }
-  });
-
-  if (emailInput) {
-    emailInput.addEventListener('input', updateEmailValidity);
-    emailInput.addEventListener('blur', () => {
-      emailInput.value = emailInput.value.trim();
-      updateEmailValidity();
-    });
-    emailInput.addEventListener('invalid', () => {
-      updateEmailValidity();
-      if (!emailInput.validity.valueMissing) {
-        msgEl.textContent = t('email_error');
-        msgEl.className = 'form-message form-error-msg';
-      }
-    });
-  }
-
-  // Intent signal: user tapped the CTA (fires even if email/consent invalid).
-  submitBtn.addEventListener('click', () => {
-    plausibleEvent('Waitlist_Click', { form: formLabel });
-    pixelCustomEvent('WaitlistButtonClick', { form: formLabel });
-  });
-
-  if (emailInput) {
-    let focusFired = false;
-    emailInput.addEventListener('focus', () => {
-      if (!focusFired) {
-        plausibleEvent('Waitlist_Focus', { form: formLabel });
-        focusFired = true;
-      }
-    });
-  }
 }
 
 /* ─── SCROLL REVEAL ──────────────────────────────── */
@@ -647,36 +489,6 @@ function initStepLoop() {
 }
 
 
-/* ─── SHARE BUTTON ───────────────────────────────── */
-
-function wireShareButton() {
-  const btn    = document.getElementById('share-btn');
-  const copied = document.getElementById('share-copied');
-  if (!btn) return;
-
-  btn.addEventListener('click', async () => {
-    plausibleEvent('Share_Click');
-    const shareData = {
-      title: 'Volum: Gym Tracker',
-      text:  'You always know what to lift. Check out Volum.',
-      url:   window.location.href,
-    };
-
-    if (navigator.share) {
-      try { await navigator.share(shareData); } catch { /* dismissed */ }
-    } else {
-      try {
-        const shareText = `Just joined the Volum waitlist — it plans your exact weight, sets, and reps every session. Check it out: ${window.location.origin}`;
-        await navigator.clipboard.writeText(shareText);
-        if (copied) {
-          copied.style.display = 'block';
-          setTimeout(() => { copied.style.display = 'none'; }, 2500);
-        }
-      } catch { /* clipboard blocked */ }
-    }
-  });
-}
-
 /* ─── PLAUSIBLE NAV EVENTS ───────────────────────── */
 
 function initPlayLinks() {
@@ -685,6 +497,13 @@ function initPlayLinks() {
       const slot = link.dataset.slot || 'unknown';
       plausibleEvent('Play_Click', { slot: slot });
       pixelCustomEvent('PlayStoreClick', { slot: slot });
+    });
+  });
+  document.querySelectorAll('a[href*="apps.apple.com"]').forEach(link => {
+    link.addEventListener('click', () => {
+      const slot = link.dataset.slot || 'unknown';
+      plausibleEvent('AppStore_Click', { slot: slot });
+      pixelCustomEvent('AppStoreClick', { slot: slot });
     });
   });
 }
@@ -784,15 +603,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initEngagement();
   initConsentBanner();
 
-  captureUTM('utm-source-hero');
-  captureUTM('utm-source-mid');
-  captureUTM('utm-source-bottom');
 
-  wireWaitlistForm('waitlist-form-hero',   'hero-form-msg',   'hero-submit-btn',   'hero');
-  wireWaitlistForm('waitlist-form-mid',    'mid-form-msg',    'mid-submit-btn',    'mid');
-  wireWaitlistForm('waitlist-form-bottom', 'bottom-form-msg', 'bottom-submit-btn', 'bottom');
 
-  wireShareButton();
   initPlayLinks();
 
   initPodiumCarousel();

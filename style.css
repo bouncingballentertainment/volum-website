@@ -1258,19 +1258,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   line-height: 1.5;
 }
 
-.share-nudge { font-size: 14px; color: var(--text-muted); margin-top: 20px; }
-.share-nudge button {
-  color: var(--accent);
-  font-size: 14px;
-  font-weight: 600;
-  font-family: var(--font);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  margin-left: 4px;
-}
-.share-nudge button:focus-visible { outline: 2px solid #fff; outline-offset: 3px; border-radius: 2px; }
-.share-copied { font-size: 13px; color: var(--accent); margin-top: 6px; display: none; }
-
 /* ─── FOOTER ──────────────────────────────────────── */
 .footer {
   background: var(--bg-primary);
@@ -1346,9 +1333,8 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .hero-content > .hero-eyebrow        { order: 1; }
   .hero-content > .hero-headline       { order: 2; }
   .hero-content > .hero-sub            { order: 3; }
-  .hero-content > .play-cta            { order: 4; }
+  .hero-content > .store-ctas          { order: 4; }
   .hero-content > .region-note         { order: 5; }
-  .hero-content > .ios-waitlist        { order: 6; }
   .hero-content > .hero-differentiator { order: 9; }
   .hero-content > .hero-proof          { order: 10; }
   .hero-content > .hero-launch         { order: 11; }
@@ -1803,27 +1789,21 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .play-cta img { width: 200px; height: auto; display: block; }
 .play-cta:hover img { filter: brightness(1.08); }
 .region-note { font-size: 12px; color: var(--text-muted); margin: 0 0 18px; }
-.ios-waitlist {
-  max-width: 420px;
-  padding-top: 16px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-}
-.ios-waitlist-h {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text-secondary);
-  margin: 0 0 10px;
-}
-.waitlist-inner .play-cta { margin: 18px auto 4px; }
-.waitlist-inner .play-cta img { width: 220px; }
+.store-ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; }
+.store-ctas .play-cta { margin: 14px 0 4px -8px; }
+.store-ctas .appstore-cta { margin: 14px 0 4px; }
+.store-ctas .appstore-cta img { width: 156px; }
+.waitlist-inner .store-ctas { justify-content: center; }
+.waitlist-inner .store-ctas .play-cta { margin: 18px 0 4px; }
+.waitlist-inner .store-ctas .play-cta img { width: 220px; }
+.waitlist-inner .store-ctas .appstore-cta { margin: 18px 0 4px; }
+.waitlist-inner .store-ctas .appstore-cta img { width: 172px; }
 .waitlist-inner .region-note { text-align: center; }
-.waitlist-inner .ios-waitlist { margin: 0 auto; }
-.waitlist-inner .ios-waitlist .waitlist-count { margin-bottom: 14px; text-align: center; }
-.waitlist-inner .ios-waitlist-h { text-align: center; }
-.mid-cta-right .play-cta { margin-left: 0; }
+.mid-cta-right .store-ctas .play-cta { margin-left: 0; }
 .footer-trademark { font-size: 11px; color: var(--text-muted); margin-top: 6px; text-align: center; }
 .badge-play.active { text-decoration: none; }
 @media (max-width: 767px) {
-  .play-cta { margin-left: 0; }
+  .store-ctas .play-cta { margin-left: 0; }
   .play-cta img { width: 190px; }
+  .store-ctas .appstore-cta img { width: 150px; }
 }
