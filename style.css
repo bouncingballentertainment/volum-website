@@ -1792,12 +1792,12 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .store-ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; }
 .store-ctas .play-cta { margin: 14px 0 4px -8px; }
 .store-ctas .appstore-cta { margin: 14px 0 4px; }
-.store-ctas .appstore-cta img { width: 156px; }
+.store-ctas .appstore-cta img { width: 151px; }
 .waitlist-inner .store-ctas { justify-content: center; }
 .waitlist-inner .store-ctas .play-cta { margin: 18px 0 4px; }
 .waitlist-inner .store-ctas .play-cta img { width: 220px; }
 .waitlist-inner .store-ctas .appstore-cta { margin: 18px 0 4px; }
-.waitlist-inner .store-ctas .appstore-cta img { width: 172px; }
+.waitlist-inner .store-ctas .appstore-cta img { width: 166px; }
 .waitlist-inner .region-note { text-align: center; }
 .mid-cta-right .store-ctas .play-cta { margin-left: 0; }
 .footer-trademark { font-size: 11px; color: var(--text-muted); margin-top: 6px; text-align: center; }
@@ -1805,5 +1805,5 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 @media (max-width: 767px) {
   .store-ctas .play-cta { margin-left: 0; }
   .play-cta img { width: 190px; }
-  .store-ctas .appstore-cta img { width: 150px; }
+  .store-ctas .appstore-cta img { width: 146px; }
 }
