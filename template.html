@@ -9,7 +9,7 @@
 
   <meta property="og:title"       content="{{og_title}}">
   <meta property="og:description" content="{{og_description}}">
-  <meta property="og:image"       content="https://app-volum.com/assets/og-image.png">
+  <meta property="og:image"       content="https://app-volum.com/assets/og-image.jpg">
   <meta property="og:image:width"  content="1344">
   <meta property="og:image:height" content="768">
   <meta property="og:type"        content="website">
@@ -34,14 +34,16 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": ["SoftwareApplication", "MobileApplication"],
     "name": "Volum",
     "description": "{{schema_description}}",
     "operatingSystem": "Android, iOS",
     "applicationCategory": "HealthApplication",
-    "inLanguage": ["en", "es", "pt"],
+    "inLanguage": "{{__html_lang}}",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-    "url": "https://app-volum.com/",
+    "url": "{{__canonical_url}}",
+    "author": { "@type": "Organization", "name": "Bouncing Ball Entertainment", "url": "https://app-volum.com/" },
+    "publisher": { "@type": "Organization", "name": "Bouncing Ball Entertainment", "url": "https://app-volum.com/" },
     "downloadUrl": "https://play.google.com/store/apps/details?id=com.volum.app",
     "installUrl": "https://play.google.com/store/apps/details?id=com.volum.app",
     "sameAs": ["https://play.google.com/store/apps/details?id=com.volum.app", "https://apps.apple.com/app/id6759938940"]
@@ -53,6 +55,11 @@
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "{{faq_q8}}",
+        "acceptedAnswer": { "@type": "Answer", "text": "{{faq_a8}}" }
+      },
       {
         "@type": "Question",
         "name": "{{faq_q1}}",
@@ -87,6 +94,36 @@
         "@type": "Question",
         "name": "{{faq_q7}}",
         "acceptedAnswer": { "@type": "Answer", "text": "{{faq_a7}}" }
+      },
+      {
+        "@type": "Question",
+        "name": "{{faq_q9}}",
+        "acceptedAnswer": { "@type": "Answer", "text": "{{faq_a9}}" }
+      },
+      {
+        "@type": "Question",
+        "name": "{{faq_q10}}",
+        "acceptedAnswer": { "@type": "Answer", "text": "{{faq_a10}}" }
+      },
+      {
+        "@type": "Question",
+        "name": "{{faq_q11}}",
+        "acceptedAnswer": { "@type": "Answer", "text": "{{faq_a11}}" }
+      },
+      {
+        "@type": "Question",
+        "name": "{{faq_q12}}",
+        "acceptedAnswer": { "@type": "Answer", "text": "{{faq_a12}}" }
+      },
+      {
+        "@type": "Question",
+        "name": "{{faq_q13}}",
+        "acceptedAnswer": { "@type": "Answer", "text": "{{faq_a13}}" }
+      },
+      {
+        "@type": "Question",
+        "name": "{{faq_q14}}",
+        "acceptedAnswer": { "@type": "Answer", "text": "{{faq_a14}}" }
       }
     ]
   }
@@ -111,6 +148,7 @@
       </a>
       <div class="nav-links">
         <a href="#features">{{nav_features}}</a>
+        <a href="#faq">{{nav_faq}}</a>
       </div>
 
       <div class="lang-picker" id="lang-picker">
@@ -137,6 +175,7 @@
       <a href="#how-it-works">{{nav_how_it_works}}</a>
       <a href="#testimonials">{{nav_testimonials}}</a>
       <a href="#real-numbers">{{nav_real_results}}</a>
+      <a href="#faq">{{nav_faq}}</a>
       <a href="#download" class="btn btn-accent" data-slot="nav">{{nav_download}}</a>
     </div>
   </nav>
@@ -165,7 +204,7 @@
             <img src="{{appstore_badge_src}}" alt="{{appstore_badge_alt}}" width="120" height="40">
           </a>
           <div class="qr-desktop">
-            <img src="/assets/qr-get.svg" alt="QR code: app-volum.com/get" width="84" height="84" loading="lazy">
+            <img src="/assets/qr-get.svg" alt="{{qr_alt}}" width="84" height="84" loading="lazy">
             <span>{{qr_caption}}</span>
           </div>
         </div>
@@ -173,16 +212,16 @@
         <p class="hero-launch">{{hero_launch}}</p>
       </div>
 
-      <div class="hero-visual" aria-label="Volum app screens">
+      <div class="hero-visual" aria-label="{{hero_visual_label}}">
         <div class="hero-stage">
           <div class="hero-screen hero-screen-back">
             <img src="/assets/app-workout.jpeg"
-                 alt="Volum workout screen showing each exercise with its planned sets, reps, and weight"
+                 alt="{{hero_img_workout_alt}}"
                  loading="lazy" width="980" height="2048">
           </div>
           <div class="hero-screen hero-screen-front">
             <img src="/assets/app-home.jpeg"
-                 alt="Volum home screen showing a 9-day streak, 10,580 lbs weekly volume, and 37 personal records"
+                 alt="{{hero_img_home_alt}}"
                  loading="eager" width="980" height="2048">
           </div>
 
@@ -271,7 +310,7 @@
       </div>
 
       <div class="features-ai-callout">
-        <span class="features-ai-badge">AI Coach</span>
+        <span class="features-ai-badge">{{ai_badge}}</span>
         <p>{{features_ai}}</p>
       </div>
     </div>
@@ -474,6 +513,10 @@
       <h2>{{faq_h2}}</h2>
       <div class="faq-list">
         <details class="faq-item">
+          <summary>{{faq_q8}}</summary>
+          <p class="faq-answer">{{faq_a8}}</p>
+        </details>
+        <details class="faq-item">
           <summary>{{faq_q1}}</summary>
           <p class="faq-answer">{{faq_a1}}</p>
         </details>
@@ -500,6 +543,30 @@
         <details class="faq-item">
           <summary>{{faq_q7}}</summary>
           <p class="faq-answer">{{faq_a7}}</p>
+        </details>
+        <details class="faq-item">
+          <summary>{{faq_q9}}</summary>
+          <p class="faq-answer">{{faq_a9}}</p>
+        </details>
+        <details class="faq-item">
+          <summary>{{faq_q10}}</summary>
+          <p class="faq-answer">{{faq_a10}}</p>
+        </details>
+        <details class="faq-item">
+          <summary>{{faq_q11}}</summary>
+          <p class="faq-answer">{{faq_a11}}</p>
+        </details>
+        <details class="faq-item">
+          <summary>{{faq_q12}}</summary>
+          <p class="faq-answer">{{faq_a12}}</p>
+        </details>
+        <details class="faq-item">
+          <summary>{{faq_q13}}</summary>
+          <p class="faq-answer">{{faq_a13}}</p>
+        </details>
+        <details class="faq-item">
+          <summary>{{faq_q14}}</summary>
+          <p class="faq-answer">{{faq_a14}}</p>
         </details>
       </div>
     </div>
@@ -558,6 +625,7 @@
         </a>
       </div>
       <p class="footer-copy">{{footer_copy}}</p>
+      <p class="footer-disclaimer">{{footer_disclaimer}}</p>
       <p class="footer-trademark">{{footer_trademark}}</p>
     </div>
   </footer>

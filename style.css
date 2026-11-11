@@ -1649,6 +1649,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .download-inner .store-ctas .appstore-cta img { width: 166px; }
 .download-inner .region-note { text-align: center; }
 .mid-cta-right .store-ctas .play-cta { margin-left: 0; }
+.footer-disclaimer { font-size: 11px; color: var(--text-muted); margin-top: 6px; text-align: center; }
 .footer-trademark { font-size: 11px; color: var(--text-muted); margin-top: 6px; text-align: center; }
 .badge-play.active { text-decoration: none; }
 @media (max-width: 767px) {

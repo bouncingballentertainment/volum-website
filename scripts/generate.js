@@ -74,6 +74,34 @@ function renderTemplate(template, data, locale) {
     .join('');
 }
 
+function writeSitemap() {
+  // lastmod = newest edit among the template and the copy files, so the date
+  // only moves when the content does.
+  const sources = [TEMPLATE_PATH, ...LOCALES.map((l) => path.join(ROOT, 'i18n', l.code + '.json'))];
+  const newest = Math.max(...sources.map((f) => fs.statSync(f).mtimeMs));
+  const lastmod = new Date(newest).toISOString().slice(0, 10);
+  const base = 'https://app-volum.com';
+  const alternates = [
+    ...LOCALES.map((l) => `    <xhtml:link rel="alternate" hreflang="${l.htmlLang}" href="${base}${l.urlPath}"/>`),
+    `    <xhtml:link rel="alternate" hreflang="x-default" href="${base}/"/>`,
+  ].join('\n');
+  const urls = LOCALES.map((l) => [
+    '  <url>',
+    `    <loc>${base}${l.urlPath}</loc>`,
+    `    <lastmod>${lastmod}</lastmod>`,
+    '    <changefreq>weekly</changefreq>',
+    `    <priority>${l.code === 'en' ? '1.0' : '0.9'}</priority>`,
+    alternates,
+    '  </url>',
+  ].join('\n')).join('\n');
+  const xml =
+    '<?xml version="1.0" encoding="UTF-8"?>\n' +
+    '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">\n' +
+    urls + '\n</urlset>\n';
+  fs.writeFileSync(path.join(ROOT, 'sitemap.xml'), xml, 'utf8');
+  console.log('Wrote sitemap.xml (lastmod ' + lastmod + ')');
+}
+
 function main() {
   const template = fs.readFileSync(TEMPLATE_PATH, 'utf8');
 
@@ -85,6 +113,7 @@ function main() {
     fs.writeFileSync(locale.outFile, html, 'utf8');
     console.log(`Wrote ${path.relative(ROOT, locale.outFile)}`);
   }
+  writeSitemap();
 }
 
 main();

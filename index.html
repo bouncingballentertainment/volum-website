@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Volum: Free-to-Use Workout Tracker · Progressive Overload</title>
-  <meta name="description" content="Know what to lift every session. Volum plans weight, sets and reps and grows your volume. Free to use, optional Premium. On Android and iOS.">
+  <title>Volum: Progressive Overload Workout Tracker (Free App)</title>
+  <meta name="description" content="Free workout tracker with an AI coach that plans your exact weight, sets and reps every session. Progressive overload on Android and iPhone. No account needed.">
   <meta name="apple-itunes-app" content="app-id=6759938940">
 
-  <meta property="og:title"       content="Volum: Free-to-Use Workout Tracker">
-  <meta property="og:description" content="Know exactly what to lift every session. Volum plans your workout so your volume grows automatically.">
-  <meta property="og:image"       content="https://app-volum.com/assets/og-image.png">
+  <meta property="og:title"       content="Volum: Progressive Overload Workout Tracker (Free App)">
+  <meta property="og:description" content="Free progressive overload workout tracker. Volum's on-device AI Coach plans the exact weight, sets and reps for every session. Android and iPhone, no account needed.">
+  <meta property="og:image"       content="https://app-volum.com/assets/og-image.jpg">
   <meta property="og:image:width"  content="1344">
   <meta property="og:image:height" content="768">
   <meta property="og:type"        content="website">
@@ -34,14 +34,16 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": ["SoftwareApplication", "MobileApplication"],
     "name": "Volum",
-    "description": "Workout tracker app, free to use with optional Premium, that plans every session: weight, sets, and reps. Your volume grows automatically.",
+    "description": "Volum is a free gym tracker app for Android and iPhone that suggests your next weight, sets and reps using an on-device AI Coach. No account needed; your workout data stays on your phone.",
     "operatingSystem": "Android, iOS",
     "applicationCategory": "HealthApplication",
-    "inLanguage": ["en", "es", "pt"],
+    "inLanguage": "en",
     "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
     "url": "https://app-volum.com/",
+    "author": { "@type": "Organization", "name": "Bouncing Ball Entertainment", "url": "https://app-volum.com/" },
+    "publisher": { "@type": "Organization", "name": "Bouncing Ball Entertainment", "url": "https://app-volum.com/" },
     "downloadUrl": "https://play.google.com/store/apps/details?id=com.volum.app",
     "installUrl": "https://play.google.com/store/apps/details?id=com.volum.app",
     "sameAs": ["https://play.google.com/store/apps/details?id=com.volum.app", "https://apps.apple.com/app/id6759938940"]
@@ -53,6 +55,11 @@
     "@context": "https://schema.org",
     "@type": "FAQPage",
     "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is Volum?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Volum is a free gym tracker app for Android and iPhone that suggests your next weight, sets and reps using an on-device AI Coach. No account needed; your workout data stays on your phone. The AI Coach is rule-based and runs on your phone, with no cloud." }
+      },
       {
         "@type": "Question",
         "name": "What app tells you exactly how much weight to lift?",
@@ -81,12 +88,42 @@
       {
         "@type": "Question",
         "name": "Is Volum free, and what platforms does it support?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Volum is free to use. The free version includes ads, and an optional Premium plan (monthly, yearly or lifetime) removes them. It is available now on Google Play for Android and on the App Store for iPhone." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Volum is free to use, with ads. An optional Premium plan (monthly, yearly or lifetime) removes the ads and unlocks extras. It is available now on Google Play for Android and on the App Store for iPhone." }
       },
       {
         "@type": "Question",
         "name": "What does training volume mean in weightlifting?",
         "acceptedAnswer": { "@type": "Answer", "text": "Training volume is sets times reps times weight, the total amount of work you move over time. It is a primary driver of muscle and strength gains. Volum tracks your volume every session and grows it gradually through automatic progressive overload." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I need an account, and where is my data stored?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No account is needed. Your workouts, history and settings are stored on your phone only. Volum has no cloud sync, so export a backup before you switch phones." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Volum work offline?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Planning and logging workouts work without an internet connection because everything runs on your phone. You only need internet for ads, purchases and subscription checks." }
+      },
+      {
+        "@type": "Question",
+        "name": "What does Premium unlock?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The free version covers planning, logging, history and the AI Coach, with ads. Premium (monthly, yearly or lifetime) removes the ads and unlocks the Intermediate and Advanced programs, the automatic rest timer, more than 2 intensity techniques of each type (supersets, drop sets and pyramids) and recovery of deleted workouts. New users get a 14-day Premium trial." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Volum good for beginners?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. It includes beginner programs and plans each session for you, so you do not need to know how much weight to pick. Set your starting weights once, then follow the plan." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Volum support kg and lbs?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Volum works in kg or lbs, and the AI Coach picks weight steps that suit the unit you use." }
+      },
+      {
+        "@type": "Question",
+        "name": "What do deload and RIR mean?",
+        "acceptedAnswer": { "@type": "Answer", "text": "A deload is a planned lighter week or session to recover. RIR (reps in reserve) is how many more reps you could have done at the end of a set. Volum looks at your recent sets to estimate fatigue and can flag when a deload may help." }
       }
     ]
   }
@@ -111,6 +148,7 @@
       </a>
       <div class="nav-links">
         <a href="#features">Features</a>
+        <a href="#faq">FAQ</a>
       </div>
 
       <div class="lang-picker" id="lang-picker">
@@ -137,6 +175,7 @@
       <a href="#how-it-works">How It Works</a>
       <a href="#testimonials">Testimonials</a>
       <a href="#real-numbers">Real Results</a>
+      <a href="#faq">FAQ</a>
       <a href="#download" class="btn btn-accent" data-slot="nav">Download</a>
     </div>
   </nav>
@@ -165,7 +204,7 @@
             <img src="/assets/badges/appstore-en.svg" alt="Download on the App Store" width="120" height="40">
           </a>
           <div class="qr-desktop">
-            <img src="/assets/qr-get.svg" alt="QR code: app-volum.com/get" width="84" height="84" loading="lazy">
+            <img src="/assets/qr-get.svg" alt="QR code to download Volum" width="84" height="84" loading="lazy">
             <span>Scan to download on your phone</span>
           </div>
         </div>
@@ -236,7 +275,7 @@
             </svg>
           </div>
           <h3>Volume that compounds</h3>
-          <p>Each session builds on the last. Your numbers go up automatically, week after week, without you having to plan a thing.</p>
+          <p>Each session builds on the last. Your planned numbers go up gradually, week after week, based on how you perform.</p>
         </div>
 
         <div class="feature-card">
@@ -302,7 +341,7 @@
           <span class="step-number" aria-hidden="true">03</span>
           <div class="step-dot" aria-hidden="true"></div>
           <h3>Log and grow</h3>
-          <p>Tap through each set. Your volume compounds automatically. Next session is planned before you leave.</p>
+          <p>Tap through each set. Your volume builds session after session. Next session is planned before you leave.</p>
         </div>
 
       </div>
@@ -474,6 +513,10 @@
       <h2>Frequently asked questions</h2>
       <div class="faq-list">
         <details class="faq-item">
+          <summary>What is Volum?</summary>
+          <p class="faq-answer">Volum is a free gym tracker app for Android and iPhone that suggests your next weight, sets and reps using an on-device AI Coach. No account needed; your workout data stays on your phone. The AI Coach is rule-based and runs on your phone, with no cloud.</p>
+        </details>
+        <details class="faq-item">
           <summary>What app tells you exactly how much weight to lift?</summary>
           <p class="faq-answer">Volum tells you the exact weight, sets, and reps for every exercise before you start. It analyzes your training history and uses an AI Coach to apply progressive overload automatically, so you never have to guess your next weight at the gym.</p>
         </details>
@@ -495,11 +538,35 @@
         </details>
         <details class="faq-item">
           <summary>Is Volum free, and what platforms does it support?</summary>
-          <p class="faq-answer">Volum is free to use. The free version includes ads, and an optional Premium plan (monthly, yearly or lifetime) removes them. It is available now on Google Play for Android and on the App Store for iPhone.</p>
+          <p class="faq-answer">Volum is free to use, with ads. An optional Premium plan (monthly, yearly or lifetime) removes the ads and unlocks extras. It is available now on Google Play for Android and on the App Store for iPhone.</p>
         </details>
         <details class="faq-item">
           <summary>What does training volume mean in weightlifting?</summary>
           <p class="faq-answer">Training volume is sets times reps times weight, the total amount of work you move over time. It is a primary driver of muscle and strength gains. Volum tracks your volume every session and grows it gradually through automatic progressive overload.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Do I need an account, and where is my data stored?</summary>
+          <p class="faq-answer">No account is needed. Your workouts, history and settings are stored on your phone only. Volum has no cloud sync, so export a backup before you switch phones.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does Volum work offline?</summary>
+          <p class="faq-answer">Yes. Planning and logging workouts work without an internet connection because everything runs on your phone. You only need internet for ads, purchases and subscription checks.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What does Premium unlock?</summary>
+          <p class="faq-answer">The free version covers planning, logging, history and the AI Coach, with ads. Premium (monthly, yearly or lifetime) removes the ads and unlocks the Intermediate and Advanced programs, the automatic rest timer, more than 2 intensity techniques of each type (supersets, drop sets and pyramids) and recovery of deleted workouts. New users get a 14-day Premium trial.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Is Volum good for beginners?</summary>
+          <p class="faq-answer">Yes. It includes beginner programs and plans each session for you, so you do not need to know how much weight to pick. Set your starting weights once, then follow the plan.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Does Volum support kg and lbs?</summary>
+          <p class="faq-answer">Yes. Volum works in kg or lbs, and the AI Coach picks weight steps that suit the unit you use.</p>
+        </details>
+        <details class="faq-item">
+          <summary>What do deload and RIR mean?</summary>
+          <p class="faq-answer">A deload is a planned lighter week or session to recover. RIR (reps in reserve) is how many more reps you could have done at the end of a set. Volum looks at your recent sets to estimate fatigue and can flag when a deload may help.</p>
         </details>
       </div>
     </div>
@@ -558,6 +625,7 @@
         </a>
       </div>
       <p class="footer-copy">© 2026 Bouncing Ball Entertainment. All rights reserved.</p>
+      <p class="footer-disclaimer">Volum is not medical advice. Talk to a professional before starting a new training program.</p>
       <p class="footer-trademark">Google Play and the Google Play logo are trademarks of Google LLC. App Store is a service mark of Apple Inc.</p>
     </div>
   </footer>

@@ -1,0 +1,26 @@
+# Volum
+
+> Volum is a free gym tracker app for Android and iPhone that suggests your next weight, sets and reps using an on-device AI Coach (progressive overload). No account needed; workout data stays on your phone.
+
+## Facts
+- Developer: Bouncing Ball Entertainment
+- Platforms: Android (Google Play) and iPhone (App Store)
+- Price: free to use, with ads. Optional Premium (monthly, yearly or lifetime) removes ads and unlocks extras (Intermediate and Advanced programs, automatic rest timer, more intensity techniques, recovery of deleted workouts). New users get a 14-day Premium trial.
+- Coach: rule-based and runs on the phone; there is no cloud sync and no account.
+- Units: kg and lbs.
+- Languages: English, Spanish, Portuguese (Brazil).
+- Privacy: workout data is stored only on the device. Ads and purchases need an internet connection.
+- Not medical advice.
+
+## Download
+- Google Play: https://play.google.com/store/apps/details?id=com.volum.app
+- App Store: https://apps.apple.com/app/id6759938940
+
+## Pages
+- English: https://app-volum.com/
+- Español: https://app-volum.com/es/
+- Português (Brasil): https://app-volum.com/pt/
+
+## Policies
+- Privacy Policy: https://bouncingballentertainment.github.io/volum-legal/privacy-policy.html
+- Terms of Service: https://bouncingballentertainment.github.io/volum-legal/terms-of-service.html
