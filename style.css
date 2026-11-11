@@ -556,83 +556,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   font-style: italic;
 }
 
-.waitlist-form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  max-width: 460px;
-  margin-bottom: 16px;
-}
-
-.waitlist-input {
-  flex: 1;
-  padding: 14px 18px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-pill);
-  color: var(--text-primary);
-  font-size: 15px;
-  font-family: var(--font);
-  outline: none;
-  transition: border-color 150ms;
-  min-width: 0;
-}
-.waitlist-input::placeholder { color: var(--text-muted); }
-.waitlist-input:focus        { border-color: var(--accent); }
-
-.form-message     { font-size: 14px; margin-bottom: 6px; min-height: 18px; }
-.form-success-msg { color: var(--accent); }
-.form-error-msg   { color: var(--error); }
-
-.form-privacy {
-  font-size: 12px;
-  color: var(--text-muted);
-  margin-top: 0;
-  text-align: left;
-}
-.form-consent {
-  font-size: 11px;
-  color: var(--text-muted);
-  margin-top: 4px;
-  text-align: left;
-  opacity: 0.75;
-}
-.form-consent a { color: var(--text-muted); text-decoration: underline; }
-.form-consent a:hover { color: var(--accent); }
-
-/* Required opt-in consent checkbox (GDPR). Full-width row within the form,
-   with readable contrast (uses --text-secondary, not the dim --text-muted). */
-.form-consent-check {
-  flex-basis: 100%;
-  display: flex;
-  align-items: flex-start;
-  gap: 9px;
-  margin-top: 2px;
-  font-size: 12.5px;
-  line-height: 1.45;
-  color: var(--text-secondary);
-  text-align: left;
-  cursor: pointer;
-}
-.form-consent-check input[type="checkbox"] {
-  flex-shrink: 0;
-  width: 16px;
-  height: 16px;
-  margin-top: 1px;
-  accent-color: var(--accent);
-  cursor: pointer;
-}
-.form-consent-check a { color: var(--text-secondary); text-decoration: underline; }
-.form-consent-check a:hover { color: var(--accent); }
-
-.waitlist-count {
-  font-size: 13px;
-  color: var(--accent);
-  font-weight: 500;
-  margin-top: 10px;
-  opacity: 0.85;
-}
-
 .hero-launch { font-size: 13px; color: var(--text-muted); }
 
 .hero-wordplay-bottom {
@@ -1185,77 +1108,27 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   min-width: 280px;
 }
 
-.mid-cta-form {
-  max-width: 460px;
-  margin-bottom: 0;
-  flex-direction: column;
-  align-items: stretch;
-}
-.mid-cta-form .waitlist-input { width: 100%; }
-.mid-cta-form .btn { width: 100%; }
-
-/* ─── WAITLIST CTA ────────────────────────────────── */
-.waitlist-section {
+/* ─── DOWNLOAD CTA ────────────────────────────────── */
+.download-section {
   padding: var(--section-pad) 0;
   background: var(--bg-card);
   border-top: 3px solid var(--accent);
 }
 
-.waitlist-inner { text-align: center; max-width: 620px; }
+.download-inner { text-align: center; max-width: 620px; }
 
-.waitlist-inner h2 {
+.download-inner h2 {
   font-size: 36px;
   font-weight: 700;
   letter-spacing: -0.5px;
   margin-bottom: 12px;
 }
 
-.waitlist-inner > p {
+.download-inner > p {
   font-size: 18px;
   color: var(--text-secondary);
   margin-bottom: 32px;
   line-height: 1.65;
-}
-
-.waitlist-form-large {
-  flex-direction: column;
-  max-width: 380px;
-  margin: 0 auto;
-  gap: 8px;
-}
-
-/* Center the Android/iPhone picker in the (centered) waitlist section
-   and align it to the form width below it. */
-.waitlist-inner .platform-picker {
-  justify-content: center;
-  max-width: 380px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.waitlist-form-large .waitlist-input {
-  border-radius: 12px;
-  text-align: center;
-  padding: 16px 18px;
-}
-
-.waitlist-form-large .btn { width: 100%; padding: 16px; font-size: 16px; }
-
-.waitlist-inner .waitlist-count {
-  font-size: 14px;
-  color: var(--accent);
-  font-weight: 500;
-  margin-bottom: 24px;
-  opacity: 0.85;
-}
-
-.waitlist-inner .form-privacy {
-  font-size: 12px;
-  color: var(--text-muted);
-  margin-bottom: 0;
-  margin-top: 12px;
-  text-align: center;
-  line-height: 1.5;
 }
 
 /* ─── FOOTER ──────────────────────────────────────── */
@@ -1381,22 +1254,17 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   }
   .hero-headline { font-size: 40px; letter-spacing: -1px; }
   .hero-sub      { font-size: 16px; }
-  .waitlist-form { flex-direction: column; }
-  .waitlist-form .btn { width: 100%; }
-  .platform-picker .platform-btn { padding: 12px 22px; font-size: 14px; }
-  .form-consent { font-size: 12px; opacity: 0.9; }
   .mid-cta-inner { flex-direction: column; gap: 20px; }
   .mid-cta-heading { font-size: 20px; max-width: 100%; text-align: center; }
   .mid-cta-quote { max-width: 100%; text-align: center; border-left: none; border-top: 2px solid var(--accent); padding: 10px 0 0; }
   .mid-cta-right { width: 100%; }
-  .mid-cta-form { max-width: 100%; }
 
   .features h2,
   .volume-statement h2,
   .how-it-works h2,
   .real-numbers h2,
   .mockup-section h2,
-.waitlist-inner h2 { font-size: 30px; }
+.download-inner h2 { font-size: 30px; }
 
   .features-grid { grid-template-columns: 1fr; }
 
@@ -1436,7 +1304,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 
   .showcase-deck { gap: 10px; }
   .stats-grid { gap: 20px; }
-  .waitlist-form-large { width: 100%; }
 
 }
 
@@ -1456,7 +1323,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .hero-headline { animation: fade-up 600ms ease both; animation-delay: 150ms; }
 .hero-sub      { animation: fade-up 600ms ease both; animation-delay: 300ms; }
 .hero-proof    { animation: fade-up 600ms ease both; animation-delay: 420ms; }
-.waitlist-form { animation: fade-up 600ms ease both; animation-delay: 540ms; }
 .hero-launch   { animation: fade-up 600ms ease both; animation-delay: 660ms; }
 
 /* ─── SCROLL REVEAL ───────────────────────────────── */
@@ -1514,23 +1380,6 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   100% { text-shadow: none; }
 }
 .stat-glow { animation: stat-glow-pulse 900ms ease forwards; }
-
-/* ─── PLATFORM PICKER ────────────────────────────── */
-.platform-picker { display: flex; gap: 8px; margin-bottom: 10px; }
-.platform-picker .platform-btn { padding: 8px 18px; font-size: 13px; }
-
-@keyframes platform-shake {
-  0%, 100% { transform: translateX(0); }
-  20%       { transform: translateX(-6px); }
-  40%       { transform: translateX(6px); }
-  60%       { transform: translateX(-4px); }
-  80%       { transform: translateX(4px); }
-}
-.platform-picker.shake { animation: platform-shake 0.4s ease; }
-.platform-picker.shake .platform-btn {
-  border-color: #ff4d4d !important;
-  box-shadow: 0 0 0 2px rgba(255, 77, 77, 0.35);
-}
 
 /* ─── READABILITY ─────────────────────────────────── */
 .hero-sub,
@@ -1784,7 +1633,7 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .hero-headline { font-size:28px; }
 }
 
-/* ─── GOOGLE PLAY CTA + iOS WAITLIST ─────────────── */
+/* ─── STORE BADGES (Google Play + App Store) ───────────────────── */
 .play-cta { display: inline-block; margin: 14px 0 4px -8px; line-height: 0; }
 .play-cta img { width: 200px; height: auto; display: block; }
 .play-cta:hover img { filter: brightness(1.08); }
@@ -1793,12 +1642,12 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .store-ctas .play-cta { margin: 14px 0 4px -8px; }
 .store-ctas .appstore-cta { margin: 14px 0 4px; }
 .store-ctas .appstore-cta img { width: 151px; }
-.waitlist-inner .store-ctas { justify-content: center; }
-.waitlist-inner .store-ctas .play-cta { margin: 18px 0 4px; }
-.waitlist-inner .store-ctas .play-cta img { width: 220px; }
-.waitlist-inner .store-ctas .appstore-cta { margin: 18px 0 4px; }
-.waitlist-inner .store-ctas .appstore-cta img { width: 166px; }
-.waitlist-inner .region-note { text-align: center; }
+.download-inner .store-ctas { justify-content: center; }
+.download-inner .store-ctas .play-cta { margin: 18px 0 4px; }
+.download-inner .store-ctas .play-cta img { width: 220px; }
+.download-inner .store-ctas .appstore-cta { margin: 18px 0 4px; }
+.download-inner .store-ctas .appstore-cta img { width: 166px; }
+.download-inner .region-note { text-align: center; }
 .mid-cta-right .store-ctas .play-cta { margin-left: 0; }
 .footer-trademark { font-size: 11px; color: var(--text-muted); margin-top: 6px; text-align: center; }
 .badge-play.active { text-decoration: none; }
@@ -1806,4 +1655,23 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .store-ctas .play-cta { margin-left: 0; }
   .play-cta img { width: 190px; }
   .store-ctas .appstore-cta img { width: 146px; }
+}
+
+/* ─── STORE ORDER + DESKTOP QR ───────────────────── */
+/* JS adds os-ios / os-android to <html>; the visitor's own store goes first.
+   Both badges always stay visible. */
+.os-ios .store-ctas .appstore-cta { order: -1; }
+.qr-desktop { display: none; }
+@media (min-width: 1024px) and (hover: hover) {
+  .qr-desktop {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 14px 0 4px 8px;
+    max-width: 170px;
+    font-size: 12px;
+    line-height: 1.35;
+    color: var(--text-muted);
+  }
+  .qr-desktop img { width: 84px; height: 84px; display: block; border-radius: 8px; background: #fff; }
 }

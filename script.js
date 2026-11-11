@@ -35,14 +35,6 @@ function t(key) {
 
 /* ─── HELPERS ────────────────────────────────────── */
 
-function escHtml(str) {
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
-}
-
 function plausibleEvent(name, props) {
   if (window.plausible) window.plausible(name, { props: props || {} });
 }
@@ -154,18 +146,10 @@ function pixelEvent(name, props) {
   sendCapiEvent(name, eventId, props);
 }
 
-// Fire a Meta CUSTOM event (e.g. waitlist button clicks / intent signals).
-function pixelCustomEvent(name, props) {
-  if (getConsent() !== 'accepted') return;
-  const eventId = genEventId();
-  if (window.fbq) window.fbq('trackCustom', name, props || {}, { eventID: eventId });
-  sendCapiEvent(name, eventId, props);
-}
+/* ─── ENGAGEMENT (download-intent signals) ───────── */
 
-/* ─── ENGAGEMENT (signup-quality signals) ────────── */
-
-// Scroll depth + time on page — these predict paid intent far better than
-// raw signup volume. Each milestone fires once per page load.
+// Scroll depth + time on page — these predict download intent far better than
+// raw page views. Each milestone fires once per page load.
 function initEngagement() {
   // Scroll depth: 25 / 50 / 75 / 100 %
   const marks = [25, 50, 75, 100];
@@ -337,7 +321,7 @@ function initScrollReveal() {
     '.real-numbers .eyebrow',
     '.real-numbers h2',
     '.real-numbers .section-sub',
-    '.waitlist-section .eyebrow',
+    '.download-section .eyebrow',
   ];
 
   const obs = new IntersectionObserver((entries) => {
@@ -491,21 +475,34 @@ function initStepLoop() {
 
 /* ─── PLAUSIBLE NAV EVENTS ───────────────────────── */
 
-function initPlayLinks() {
+function storeClick(store, slot) {
+  plausibleEvent('Store_Click', { store: store, slot: slot });
+  // Standard Lead event so Meta ads can optimize toward store clicks.
+  pixelEvent('Lead', { content_name: 'store_click', store: store, slot: slot });
+}
+
+function initStoreLinks() {
   document.querySelectorAll('a[href*="play.google.com"]').forEach(link => {
-    link.addEventListener('click', () => {
-      const slot = link.dataset.slot || 'unknown';
-      plausibleEvent('Play_Click', { slot: slot });
-      pixelCustomEvent('PlayStoreClick', { slot: slot });
-    });
+    link.addEventListener('click', () => storeClick('play', link.dataset.slot || 'unknown'));
   });
   document.querySelectorAll('a[href*="apps.apple.com"]').forEach(link => {
-    link.addEventListener('click', () => {
-      const slot = link.dataset.slot || 'unknown';
-      plausibleEvent('AppStore_Click', { slot: slot });
-      pixelCustomEvent('AppStoreClick', { slot: slot });
-    });
+    link.addEventListener('click', () => storeClick('appstore', link.dataset.slot || 'unknown'));
   });
+  // Nav "Download" button only scrolls to the hero badges.
+  document.querySelectorAll('a[href="#download"]').forEach(link => {
+    link.addEventListener('click', () => storeClick('nav', link.dataset.slot || 'nav'));
+  });
+}
+
+// Put the visitor's own store first. Both badges always stay visible, and
+// desktop keeps the default order, so a wrong guess costs nothing.
+function initStoreOrder() {
+  const ua = navigator.userAgent || '';
+  const isIos = /iPhone|iPad|iPod/i.test(ua) ||
+    (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  const isAndroid = /Android/i.test(ua);
+  if (isIos) document.documentElement.classList.add('os-ios');
+  else if (isAndroid) document.documentElement.classList.add('os-android');
 }
 
 /* ─── TESTIMONIAL CARDS ──────────────────────────── */
@@ -603,9 +600,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initEngagement();
   initConsentBanner();
 
-
-
-  initPlayLinks();
+  initStoreOrder();
+  initStoreLinks();
 
   initPodiumCarousel();
   initScrollReveal();

@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{{meta_title}}</title>
   <meta name="description" content="{{meta_description}}">
+  <meta name="apple-itunes-app" content="app-id=6759938940">
 
   <meta property="og:title"       content="{{og_title}}">
   <meta property="og:description" content="{{og_description}}">
@@ -158,11 +159,15 @@
         <p class="hero-proof">{{hero_proof}}</p>
         <div class="store-ctas" id="download">
             <a class="play-cta" data-slot="hero" href="https://play.google.com/store/apps/details?id=com.volum.app&amp;referrer=utm_source%3Dapp-volum.com%26utm_medium%3Dwebsite%26utm_campaign%3Dhero" target="_blank" rel="noopener">
-          <img src="{{play_badge_src}}" alt="{{play_badge_alt}}" width="646" height="250" loading="lazy">
+          <img src="{{play_badge_src}}" alt="{{play_badge_alt}}" width="646" height="250">
           </a>
           <a class="play-cta appstore-cta" data-slot="hero" href="https://apps.apple.com/app/id6759938940" target="_blank" rel="noopener">
-            <img src="{{appstore_badge_src}}" alt="{{appstore_badge_alt}}" width="120" height="40" loading="lazy">
+            <img src="{{appstore_badge_src}}" alt="{{appstore_badge_alt}}" width="120" height="40">
           </a>
+          <div class="qr-desktop">
+            <img src="/assets/qr-get.svg" alt="QR code: app-volum.com/get" width="84" height="84" loading="lazy">
+            <span>{{qr_caption}}</span>
+          </div>
         </div>
         <p class="region-note">{{region_note}}</p>
         <p class="hero-launch">{{hero_launch}}</p>
@@ -500,9 +505,9 @@
     </div>
   </section>
 
-  <!-- ════════════════════════════ WAITLIST CTA ════════════════════════════ -->
-  <section class="waitlist-section" id="waitlist">
-    <div class="container waitlist-inner">
+  <!-- ════════════════════════════ DOWNLOAD CTA ════════════════════════════ -->
+  <section class="download-section" id="get-app">
+    <div class="container download-inner">
       <h2>{{cta_h2}}</h2>
       <p>{{cta_p}}</p>
       <div class="store-ctas">
